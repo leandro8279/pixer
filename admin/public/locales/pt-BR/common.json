@@ -1,0 +1,11 @@
+{
+  "getStarted": "Começar",
+  "editFile": "Edite <code>src/App.tsx</code> e salve para testar o <code>HMR</code>",
+  "countIs": "Contagem é {{count}}",
+  "documentation": "Documentação",
+  "documentationDesc": "Suas dúvidas, respondidas",
+  "exploreVite": "Explorar Vite",
+  "learnMore": "Saiba mais",
+  "connect": "Conecte-se conosco",
+  "connectDesc": "Junte-se à comunidade Vite"
+}
