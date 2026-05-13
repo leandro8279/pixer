@@ -14,11 +14,24 @@ runButton = "Project"
 [[workflows.workflow]]
 name = "Admin"
 mode = "sequential"
-author = 59050906
+author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "pnpm --filter @workspace/admin run dev"
+waitForPort = 5173
+
+[workflows.workflow.metadata]
+outputType = "webview"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Admin"
 
 [agent]
 stack = "PNPM_WORKSPACE"
