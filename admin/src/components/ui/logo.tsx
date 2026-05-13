@@ -8,7 +8,6 @@ import { useAtom } from 'jotai';
 import { miniSidebarInitialValue } from '@/utils/constants';
 import { useWindowSize } from '@/utils/use-window-size';
 import { RESPONSIVE_WIDTH } from '@/utils/constants';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useSettingsQuery } from '@/data/settings';
 import RenderComponent from '@/components/common/render-component';
@@ -37,15 +36,13 @@ export function Logo({
             height: siteSettings.collapseLogo.height,
           }}
         >
-          <Image
+          <img
             src={
               settings?.options?.collapseLogo?.original ??
               siteSettings.collapseLogo.url
             }
             alt={settings?.options?.siteTitle ?? siteSettings.collapseLogo.alt}
-            fill
-            sizes="(max-width: 768px) 100vw"
-            className="object-contain"
+            className="object-contain w-full h-full"
             loading="eager"
           />
         </span>
@@ -58,12 +55,10 @@ export function Logo({
             height: siteSettings.logo.height,
           }}
         >
-          <Image
+          <img
             src={settings?.options?.logo?.original ?? siteSettings.logo.url}
             alt={settings?.options?.siteTitle ?? siteSettings.logo.alt}
-            fill
-            sizes="(max-width: 768px) 100vw"
-            className="object-contain"
+            className="object-contain w-full h-full"
             loading="eager"
           />
         </span>

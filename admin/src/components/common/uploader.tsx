@@ -6,7 +6,6 @@ import { CloseIcon } from '@/components/icons/close-icon';
 import Loader from '@/components/ui/loader/loader';
 import { useTranslation } from 'next-i18next';
 import { useUploadMutation } from '@/data/upload';
-import Image from 'next/image';
 import { zipPlaceholder } from '@/utils/placeholders';
 import { ACCEPTED_FILE_TYPES } from '@/utils/constants';
 import classNames from 'classnames';
@@ -123,19 +122,17 @@ export function Uploader({
         >
           <RenderComponent conditional={!!isImage}>
             <figure className="relative flex items-center justify-center h-16 w-28 aspect-square">
-              <Image
+              <img
                 src={file.thumbnail}
                 alt={filename}
-                fill
-                sizes="(max-width: 768px) 100vw"
-                className="object-cover"
+                className="object-cover w-full h-full"
               />
             </figure>
           </RenderComponent>
           <RenderComponent conditional={!isImage}>
             <div className="flex flex-col items-center">
               <div className="flex items-center justify-center min-w-0 overflow-hidden h-14 w-14">
-                <Image
+                <img
                   src={zipPlaceholder}
                   width={56}
                   height={56}
