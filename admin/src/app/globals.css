@@ -107,6 +107,11 @@
   --color-complete: var(--complete);
   --color-canceled: var(--canceled);
   --color-failed: var(--failed);
+  --color-status-pending: var(--pending);
+  --color-status-processing: var(--processing);
+  --color-status-complete: var(--complete);
+  --color-status-canceled: var(--canceled);
+  --color-status-failed: var(--failed);
   --color-out-for-delivery: var(--out-for-delivery);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
@@ -130,7 +135,7 @@ a {
 }
 
 body {
-  /* @apply font-body; */
+  font-family: Inter, Helvetica, sans-serif;
 }
 
 input::-webkit-outer-spin-button,
