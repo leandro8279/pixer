@@ -22,7 +22,10 @@ export default defineConfig({
       {
         find: "@",
         replacement: path.resolve(__dirname, "src"),
-        // Defina seus aliases aqui
+      },
+      {
+        find: "next/router",
+        replacement: path.resolve(__dirname, "src/shims/next/router"),
       },
     ],
   },
