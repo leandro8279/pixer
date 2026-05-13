@@ -1,7 +1,0 @@
-packages:
-  - admin
-
-autoInstallPeers: false
-ignoredBuiltDependencies:
-  - sharp
-  - unrs-resolver
