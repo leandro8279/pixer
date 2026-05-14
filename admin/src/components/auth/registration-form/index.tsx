@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { Observer } from 'mobx-react-lite';
 
 import RenderComponent from '@/components/common/render-component';
 import Alert from '@/components/ui/alert';
@@ -15,7 +16,7 @@ import { useRegistrationForm } from './useRegistrationForm';
 
 export function RegistrationForm() {
   const { t } = useTranslation();
-  const { handleSubmit, register, errors, store } = useRegistrationForm();
+  const { handleSubmit, register, errors, mutation } = useRegistrationForm();
 
   return (
     <React.Fragment>
@@ -42,19 +43,27 @@ export function RegistrationForm() {
           variant='outline'
           className='mb-4'
         />
-        <Button className='w-full' loading={false} disabled={false}>
-          {t('form:text-register')}
-        </Button>
+        <Observer>
+          {() => (
+            <Button className='w-full' loading={mutation.isLoading} disabled={mutation.isLoading}>
+              {t('form:text-register')}
+            </Button>
+          )}
+        </Observer>
 
-        <RenderComponent conditional={store.errorMessage}>
-          <Alert
-            message={t(store.errorMessage)}
-            variant='error'
-            closeable={true}
-            className='mt-5'
-            onClose={() => store.setErrorMessage(null)}
-          />
-        </RenderComponent>
+        <Observer>
+          {() => (
+            <RenderComponent conditional={mutation.isError && mutation.error}>
+              <Alert
+                message={mutation.error?.message ?? ''}
+                variant='error'
+                closeable={true}
+                className='mt-5'
+                onClose={() => {}}
+              />
+            </RenderComponent>
+          )}
+        </Observer>
       </form>
       <div className='relative flex flex-col items-center justify-center mt-8 mb-6 text-sm text-heading sm:mt-11 sm:mb-8'>
         <hr className='w-full' />

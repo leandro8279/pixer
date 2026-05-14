@@ -1,10 +1,10 @@
 import { useForm } from 'react-hook-form';
-
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useLocation } from 'wouter';
 
 import { Permission } from '@/types';
-
-import { useLocalObservable } from 'mobx-react-lite';
+import { useRootStore } from '@/contexts/root-context';
+import { Routes } from '@/config/routes';
 
 import { registrationFormSchema } from './registrationFormSchema';
 
@@ -16,19 +16,21 @@ type FormValues = {
 };
 
 export const useRegistrationForm = () => {
-  const store = useLocalObservable(() => ({
-    errorMessage: '',
-    setErrorMessage(message: string | null) {
-      this.errorMessage = message || '';
-    },
-  }));
+  const { auth } = useRootStore();
+  const [, navigate] = useLocation();
 
   const { register, handleSubmit, formState, setError } = useForm<FormValues>({
     resolver: yupResolver(registrationFormSchema),
     defaultValues: { email: '', name: '', password: '', permission: Permission.StoreOwner },
   });
 
-  function onSubmit({ name, email, password, permission }: FormValues) {}
+  async function onSubmit({ name, email, password, permission }: FormValues) {
+    await auth.register.mutateAsync({ name, email, password, permission });
 
-  return { store, handleSubmit: handleSubmit(onSubmit), register, errors: formState.errors, setError };
+    if (auth.register.isSuccess) {
+      navigate(Routes.dashboard);
+    }
+  }
+
+  return { mutation: auth.register, handleSubmit: handleSubmit(onSubmit), register, errors: formState.errors, setError };
 };
