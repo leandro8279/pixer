@@ -1,7 +1,8 @@
-import cn from 'classnames';
-import { CloseIcon } from '@/components/icons/close-icon';
-import { twMerge } from 'tailwind-merge';
 import RenderComponent from '@/components/common/render-component';
+import { CloseIcon } from '@/components/icons/close-icon';
+
+import cn from 'classnames';
+import { twMerge } from 'tailwind-merge';
 
 type AlertProps = {
   message: string | undefined | null;
@@ -47,25 +48,25 @@ export function Alert({
         cn(
           'relative flex items-center justify-between rounded py-4 px-5 shadow-sm',
           variantClasses[variant],
-          className
-        )
+          className,
+        ),
       )}
-      role="alert"
+      role='alert'
     >
       <div className={twMerge(cn(childClassName))}>
-        <p className="text-sm">{message}</p>
+        <p className='text-sm'>{message}</p>
         {children}
       </div>
       <RenderComponent conditional={!!closeable}>
         <button
-          data-dismiss="alert"
-          aria-label="Close"
+          data-dismiss='alert'
+          aria-label='Close'
           onClick={onClose}
-          title="Close alert"
-          className="absolute top-1/2 -mt-3 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full text-red-500 transition-colors duration-200 -me-0.5 end-2 hover:bg-gray-300 hover:bg-opacity-25 focus:bg-gray-300 focus:bg-opacity-25 focus:outline-none"
+          title='Close alert'
+          className='absolute top-1/2 -mt-3 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full text-red-500 transition-colors duration-200 -me-0.5 end-2 hover:bg-gray-300 hover:bg-opacity-25 focus:bg-gray-300 focus:bg-opacity-25 focus:outline-none'
         >
-          <span aria-hidden="true">
-            <CloseIcon className="h-3 w-3" />
+          <span aria-hidden='true'>
+            <CloseIcon className='h-3 w-3' />
           </span>
         </button>
       </RenderComponent>

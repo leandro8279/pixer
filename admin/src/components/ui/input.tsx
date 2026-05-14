@@ -1,9 +1,10 @@
-import TooltipLabel from '@/components/ui/tooltip-label';
-import cn from 'classnames';
-import type { InputHTMLAttributes } from 'react';
-import { twMerge } from 'tailwind-merge';
 import RenderComponent from '@/components/common/render-component';
+import TooltipLabel from '@/components/ui/tooltip-label';
 
+import cn from 'classnames';
+import { twMerge } from 'tailwind-merge';
+
+import type { InputHTMLAttributes } from 'react';
 export interface Props extends InputHTMLAttributes<HTMLInputElement> {
   className?: string;
   inputClassName?: string;
@@ -24,10 +25,8 @@ export interface Props extends InputHTMLAttributes<HTMLInputElement> {
 
 const classes = {
   root: 'px-4 h-12 flex items-center w-full rounded appearance-none transition duration-300 ease-in-out text-heading text-sm focus:outline-none focus:ring-0',
-  normal:
-    'bg-gray-100 border border-border-base focus:shadow focus:bg-light focus:border-accent',
-  solid:
-    'bg-gray-100 border border-border-100 focus:bg-light focus:border-accent',
+  normal: 'bg-gray-100 border border-border-base focus:shadow focus:bg-light focus:border-accent',
+  solid: 'bg-gray-100 border border-border-100 focus:bg-light focus:border-accent',
   outline: 'border border-border-base focus:border-accent',
   shadow: 'focus:shadow',
 };
@@ -44,7 +43,6 @@ export function Input({
   note,
   name,
   error,
-  children,
   variant = 'normal',
   dimension = 'medium',
   shadow = false,
@@ -67,7 +65,7 @@ export function Input({
     },
     { [classes.shadow]: shadow },
     sizeClasses[dimension],
-    inputClassName
+    inputClassName,
   );
   const numberDisable = type === 'number' && disabled ? 'number-disable' : '';
 
@@ -89,25 +87,23 @@ export function Input({
         ref={ref}
         className={twMerge(
           cn(
-            disabled
-              ? `cursor-not-allowed border-[#D4D8DD] bg-[#EEF1F4] ${numberDisable} select-none`
-              : '',
-            rootClassName
-          )
+            disabled ? `cursor-not-allowed border-[#D4D8DD] bg-[#EEF1F4] ${numberDisable} select-none` : '',
+            rootClassName,
+          ),
         )}
-        autoComplete="off"
-        autoCorrect="off"
-        autoCapitalize="off"
-        spellCheck="false"
+        autoComplete='off'
+        autoCorrect='off'
+        autoCapitalize='off'
+        spellCheck='false'
         disabled={disabled}
         aria-invalid={!!error}
         {...rest}
       />
       <RenderComponent conditional={!!note}>
-        <p className="mt-2 text-xs text-body">{note}</p>
+        <p className='mt-2 text-xs text-body'>{note}</p>
       </RenderComponent>
       <RenderComponent conditional={!!error}>
-        <p className="my-2 text-xs text-red-500 text-start">{error}</p>
+        <p className='my-2 text-xs text-red-500 text-start'>{error}</p>
       </RenderComponent>
     </div>
   );
