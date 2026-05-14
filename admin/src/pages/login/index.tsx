@@ -1,18 +1,31 @@
+import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { reaction } from 'mobx';
+import { useLocation } from 'wouter';
 
 import { LoginForm } from '@/components/auth/login-form';
 import { AuthLayout } from '@/components/layouts/auth-layout';
-
-import { useRouter } from 'wouter';
+import { useRootStore } from '@/contexts/root-context';
+import { Routes } from '@/config/routes';
 
 export function LoginPage() {
   const { t } = useTranslation('common');
+  const { auth } = useRootStore();
+  const [, navigate] = useLocation();
 
-  const router = useRouter();
-  // const { token, permissions } = getAuthCredentials();
-  // if (isAuthenticated({ token, permissions })) {
-  //   router.replace(Routes.dashboard);
-  // }
+  useEffect(() => {
+    const dispose = reaction(
+      () => auth.isAuthenticated,
+      (isAuthenticated, previousIsAuthenticated) => {
+        if (isAuthenticated && !previousIsAuthenticated) {
+          navigate(Routes.dashboard);
+        }
+      },
+      { fireImmediately: true },
+    );
+
+    return dispose;
+  }, [auth, navigate]);
 
   return (
     <AuthLayout>
