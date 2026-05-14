@@ -1,3 +1,7 @@
+import { QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+
+import { queryClient } from '@/config/query-client';
 import { RootProvider } from '@/contexts/root-context';
 
 import { Routes } from '@/config/routes';
@@ -16,14 +20,15 @@ function Router() {
 }
 
 function App() {
-  // const { t, i18n } = useTranslation('common')
-
   return (
-    <RootProvider>
-      <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, '')}>
-        <Router />
-      </WouterRouter>
-    </RootProvider>
+    <QueryClientProvider client={queryClient}>
+      <RootProvider>
+        <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, '')}>
+          <Router />
+        </WouterRouter>
+      </RootProvider>
+      {import.meta.env.DEV && <ReactQueryDevtools initialIsOpen={false} />}
+    </QueryClientProvider>
   );
 }
 
