@@ -26,6 +26,6 @@ async function bootstrap() {
   // Interceptors globais: logging de requests + timeout de 30s
   app.useGlobalInterceptors(new LoggingInterceptor(), new TimeoutInterceptor(30_000));
 
-  await app.listen(process.env.PORT ?? 3001);
+  await app.listen(process.env.BACKEND_PORT ?? 3001);
 }
 bootstrap();

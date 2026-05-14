@@ -3,17 +3,21 @@ import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import * as path from "path";
 
-const port = process.env.PORT ? Number(process.env.PORT) : 5173;
-
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   server: {
-    port,
+    port: 5000,
     host: "0.0.0.0",
     allowedHosts: true,
+    proxy: {
+      "/api": {
+        target: "http://localhost:3001",
+        changeOrigin: true,
+      },
+    },
   },
   preview: {
-    port,
+    port: 5000,
     host: "0.0.0.0",
     allowedHosts: true,
   },
