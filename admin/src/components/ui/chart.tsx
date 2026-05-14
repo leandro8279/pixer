@@ -1,9 +1,13 @@
-import dynamic from 'next/dynamic';
+import { lazy, Suspense } from 'react';
 
-const Charts = dynamic(() => import('react-apexcharts'), { ssr: false });
+const Charts = lazy(() => import('react-apexcharts'));
 
 export function Chart({ ...props }) {
-  return <Charts {...props} />;
+  return (
+    <Suspense fallback={null}>
+      <Charts {...props} />
+    </Suspense>
+  );
 }
 
 export default Chart;
