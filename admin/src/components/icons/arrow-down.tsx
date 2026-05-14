@@ -1,4 +1,3 @@
-import React from 'react';
 export const ArrowDown = ({
   color = 'currentColor',
   width = '12px',

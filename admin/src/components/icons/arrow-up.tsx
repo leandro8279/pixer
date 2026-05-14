@@ -1,4 +1,3 @@
-import React from 'react';
 export const ArrowUp = ({
   color = 'currentColor',
   width = '12px',

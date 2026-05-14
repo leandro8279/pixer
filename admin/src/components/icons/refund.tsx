@@ -1,4 +1,3 @@
-import React from 'react';
 export const Refund = ({
   color = 'currentColor',
   width = '56px',

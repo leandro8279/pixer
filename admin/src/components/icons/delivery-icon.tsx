@@ -1,4 +1,3 @@
-import React from 'react';
 export const DeliveryIcon = ({ width = '48px', height = '48px' }) => {
   return (
     <svg

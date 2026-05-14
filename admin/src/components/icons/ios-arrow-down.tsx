@@ -1,4 +1,3 @@
-import React from 'react';
 export const IosArrowDown = ({
   color = 'currentColor',
   width = '7px',

@@ -1,4 +1,3 @@
-import React from 'react';
 export const OrderIcon = ({ width = '11.321', height = '13' }) => {
   return (
     <svg

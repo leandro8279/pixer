@@ -1,4 +1,3 @@
-import React from 'react';
 export const OralCare: React.FC<React.SVGAttributes<{}>> = (props) => {
   return (
     <svg

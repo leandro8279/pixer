@@ -1,4 +1,3 @@
-import React from 'react';
 export const Dairy: React.FC<React.SVGAttributes<{}>> = (props) => {
   return (
     <svg

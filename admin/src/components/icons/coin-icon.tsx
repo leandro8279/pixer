@@ -1,4 +1,3 @@
-import React from 'react';
 export const CoinIcon = ({ width = '48px', height = '48px' }) => {
   return (
     <svg

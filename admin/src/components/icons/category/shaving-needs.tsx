@@ -1,4 +1,3 @@
-import React from 'react';
 export const ShavingNeeds: React.FC<React.SVGAttributes<{}>> = (props) => {
   return (
     <svg

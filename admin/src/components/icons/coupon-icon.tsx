@@ -1,4 +1,3 @@
-import React from 'react';
 export const CouponIcon = ({ width = '11.426', height = '13' }) => {
   return (
     <svg

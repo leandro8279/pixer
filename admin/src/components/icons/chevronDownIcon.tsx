@@ -1,4 +1,3 @@
-import React from 'react';
 export const ChevronDown = ({
   color = 'currentColor',
   width = '14px',

@@ -1,4 +1,3 @@
-import React from 'react';
 export const FacialCare: React.FC<React.SVGAttributes<{}>> = (props) => {
   return (
     <svg

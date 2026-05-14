@@ -1,4 +1,3 @@
-import React from 'react';
 export const DescendingSortIcon: React.FC<React.SVGAttributes<{}>> = (
   props
 ) => (

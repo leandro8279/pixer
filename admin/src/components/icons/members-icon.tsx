@@ -1,4 +1,3 @@
-import React from 'react';
 export const MembersIcon = ({
   color = 'currentColor',
   width = '56px',

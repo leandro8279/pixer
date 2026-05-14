@@ -1,4 +1,3 @@
-import React from 'react';
 export const SiteSettingsIcon = ({
   color = 'currentColor',
   width = '56px',

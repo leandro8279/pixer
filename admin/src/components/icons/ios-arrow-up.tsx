@@ -1,4 +1,3 @@
-import React from 'react';
 export const IosArrowUp = ({
   color = 'currentColor',
   width = '7px',
