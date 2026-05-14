@@ -1,11 +1,11 @@
-import type { ReactNode } from 'react'
+import type { ReactNode } from 'react';
 
 interface RenderComponentProps {
-  conditional: boolean
-  children: ReactNode
+  conditional: any;
+  children: ReactNode;
 }
 
 export default function RenderComponent({ conditional, children }: RenderComponentProps) {
-  if (!conditional) return null
-  return <>{children}</>
+  if (!conditional) return null;
+  return <>{children}</>;
 }
