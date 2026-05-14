@@ -2,11 +2,12 @@
 import React, { useMemo } from 'react';
 
 import { RootStore } from '@/stores/RootStore';
+import { rootService } from '@/services/root.service';
 
 const RootContext = React.createContext<RootStore>({} as RootStore);
 
 export function RootProvider({ children }: React.PropsWithChildren) {
-  const store = useMemo(() => new RootStore(), []);
+  const store = useMemo(() => new RootStore(rootService), []);
 
   return <RootContext.Provider value={store}>{children}</RootContext.Provider>;
 }

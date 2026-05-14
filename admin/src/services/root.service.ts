@@ -1,7 +1,7 @@
 import { BaseService } from './base.service';
 import { AuthService, authService } from './auth.service';
 
-class RootService extends BaseService {
+export class RootService extends BaseService {
   private static _instance: RootService | null = null;
 
   private constructor() {
