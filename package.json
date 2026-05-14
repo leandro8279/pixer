@@ -4,6 +4,7 @@
   "license": "MIT",
   "scripts": {
     "admin": "pnpm --filter @workspace/admin run dev",
+    "backend": "pnpm --filter @workspace/backend run dev",
     "preinstall": "sh -c 'rm -f package-lock.json yarn.lock; case \"$npm_config_user_agent\" in pnpm/*) ;; *) echo \"Use pnpm instead\" >&2; exit 1 ;; esac'",
     "build": "pnpm run typecheck && pnpm -r --if-present run build",
     "typecheck:libs": "tsc --build",
