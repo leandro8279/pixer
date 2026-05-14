@@ -4,7 +4,7 @@ import { useDropzone } from 'react-dropzone';
 import { Attachment } from '@/types';
 import { CloseIcon } from '@/components/icons/close-icon';
 import Loader from '@/components/ui/loader/loader';
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from 'react-i18next';
 import { useUploadMutation } from '@/data/upload';
 import { zipPlaceholder } from '@/utils/placeholders';
 import { ACCEPTED_FILE_TYPES } from '@/utils/constants';
