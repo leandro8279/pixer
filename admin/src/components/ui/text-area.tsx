@@ -1,6 +1,6 @@
 import TooltipLabel from '@/components/ui/tooltip-label';
 import cn from 'classnames';
-import { TextareaHTMLAttributes } from 'react';
+import type { TextareaHTMLAttributes } from 'react';
 import { twMerge } from 'tailwind-merge';
 import RenderComponent from '@/components/common/render-component';
 

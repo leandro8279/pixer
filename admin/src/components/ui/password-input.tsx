@@ -1,7 +1,8 @@
 import { Eye } from '@/components/icons/eye-icon';
 import { EyeOff } from '@/components/icons/eye-off-icon';
 import cn from 'classnames';
-import { InputHTMLAttributes, useState } from 'react';
+import type { InputHTMLAttributes } from 'react';
+import { useState } from 'react';
 import Link from './link';
 import RenderComponent from '@/components/common/render-component';
 

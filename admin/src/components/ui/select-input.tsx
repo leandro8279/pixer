@@ -1,7 +1,7 @@
 import Select from '@/components/ui/select/select';
 import TooltipLabel from '@/components/ui/tooltip-label';
 import { Controller } from 'react-hook-form';
-import { GetOptionLabel } from 'react-select';
+import type { GetOptionLabel } from 'react-select';
 import RenderComponent from '@/components/common/render-component';
 
 interface SelectInputProps {

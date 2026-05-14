@@ -2,8 +2,8 @@ import ValidationError from '@/components/ui/form-validation-error';
 import TooltipLabel from '@/components/ui/tooltip-label';
 import { Switch } from '@headlessui/react';
 import classNames from 'classnames';
-import { useTranslation } from 'react-i18next';
-import { Control, Controller } from 'react-hook-form';
+import type { Control } from 'react-hook-form';
+import { Controller } from 'react-hook-form';
 import { twMerge } from 'tailwind-merge';
 import RenderComponent from '@/components/common/render-component';
 
@@ -32,7 +32,6 @@ export function SwitchInput({
   labelClassName,
   ...rest
 }: Props) {
-  const { t } = useTranslation();
   return (
     <>
       <div

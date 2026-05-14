@@ -1,5 +1,5 @@
 import TooltipLabel from '@/components/ui/tooltip-label';
-import { InputHTMLAttributes } from 'react';
+import type { InputHTMLAttributes } from 'react';
 import { twMerge } from 'tailwind-merge';
 import RenderComponent from '@/components/common/render-component';
 

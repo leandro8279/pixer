@@ -1,5 +1,5 @@
 import cn from 'classnames';
-import React, { ButtonHTMLAttributes } from 'react';
+import type { ButtonHTMLAttributes } from 'react';
 import { twMerge } from 'tailwind-merge';
 import RenderComponent from '@/components/common/render-component';
 
@@ -11,6 +11,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   loading?: boolean;
   disabled?: boolean;
   children?: React.ReactNode;
+  ref?: React.Ref<HTMLButtonElement>;
 }
 
 const classes = {
@@ -30,57 +31,52 @@ const classes = {
   big: 'px-10 py-0 h-14',
 };
 
-export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  (props, ref) => {
-    const {
-      className,
-      variant = 'normal',
-      size = 'medium',
-      active,
-      children,
-      loading = false,
-      disabled = false,
-      ...rest
-    } = props;
+export function Button({
+  className,
+  variant = 'normal',
+  size = 'medium',
+  active,
+  children,
+  loading = false,
+  disabled = false,
+  ref,
+  ...rest
+}: ButtonProps) {
+  const classesName = cn(
+    classes.root,
+    {
+      [classes.normal]: !disabled && variant === 'normal',
+      [classes.disabled]: disabled && variant === 'normal',
+      [classes.outline]: !disabled && variant === 'outline',
+      [classes.disabledOutline]: disabled && variant === 'outline',
+      [classes.small]: size === 'small',
+      [classes.medium]: size === 'medium',
+      [classes.big]: size === 'big',
+    },
+    className
+  );
 
-    const classesName = cn(
-      classes.root,
-      {
-        [classes.normal]: !disabled && variant === 'normal',
-        [classes.disabled]: disabled && variant === 'normal',
-        [classes.outline]: !disabled && variant === 'outline',
-        [classes.disabledOutline]: disabled && variant === 'outline',
-        [classes.small]: size === 'small',
-        [classes.medium]: size === 'medium',
-        [classes.big]: size === 'big',
-      },
-      className,
-    );
-
-    return (
-      <button
-        aria-pressed={active}
-        data-variant={variant}
-        ref={ref}
-        className={twMerge(classesName)}
-        disabled={disabled}
-        {...rest}
-      >
-        {children}
-        <RenderComponent conditional={loading}>
-          <span
-            className={classes.loading}
-            style={{
-              borderTopColor:
-                variant === 'outline' ? 'currentColor' : '#ffffff',
-            }}
-          />
-        </RenderComponent>
-      </button>
-    );
-  },
-);
-
-Button.displayName = 'Button';
+  return (
+    <button
+      aria-pressed={active}
+      data-variant={variant}
+      ref={ref}
+      className={twMerge(classesName)}
+      disabled={disabled}
+      {...rest}
+    >
+      {children}
+      <RenderComponent conditional={loading}>
+        <span
+          className={classes.loading}
+          style={{
+            borderTopColor:
+              variant === 'outline' ? 'currentColor' : '#ffffff',
+          }}
+        />
+      </RenderComponent>
+    </button>
+  );
+}
 
 export default Button;

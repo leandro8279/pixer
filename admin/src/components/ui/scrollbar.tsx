@@ -1,5 +1,5 @@
 import cn from 'classnames';
-import { PartialOptions } from 'overlayscrollbars';
+import type { PartialOptions } from 'overlayscrollbars';
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 import 'overlayscrollbars/overlayscrollbars.css';
 

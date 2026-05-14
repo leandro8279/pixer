@@ -1,6 +1,7 @@
-import { cloneElement, RefObject, useRef, useState } from 'react';
+import type { RefObject } from 'react';
+import { cloneElement, useRef, useState } from 'react';
+import type { Placement } from '@floating-ui/react';
 import {
-  Placement,
   FloatingArrow,
   offset,
   flip,

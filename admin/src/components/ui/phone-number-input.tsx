@@ -1,6 +1,6 @@
 import { Controller } from 'react-hook-form';
 import cn from 'classnames';
-import { InputHTMLAttributes } from 'react';
+import type { InputHTMLAttributes } from 'react';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/bootstrap.css';
 import { twMerge } from 'tailwind-merge';

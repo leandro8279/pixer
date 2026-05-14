@@ -1,5 +1,5 @@
 import cn from 'classnames';
-import { LabelHTMLAttributes } from 'react';
+import type { LabelHTMLAttributes } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 export interface Props extends LabelHTMLAttributes<HTMLLabelElement> {

@@ -1,4 +1,5 @@
-import RCPagination, { PaginationProps } from 'rc-pagination';
+import RCPagination from 'rc-pagination';
+import type { PaginationProps } from 'rc-pagination';
 import { ArrowNext } from '@/components/icons/arrow-next';
 import { ArrowPrev } from '@/components/icons/arrow-prev';
 import 'rc-pagination/assets/index.css';
