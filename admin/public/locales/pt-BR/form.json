@@ -1,4 +1,8 @@
 {
+  "error-email-format": "Formato de e-mail inválido",
+  "error-email-required": "E-mail é obrigatório",
+  "error-password-required": "Senha é obrigatória",
+  "link-register-shop-owner": "Registrar como proprietário de loja",
   "form-title-permission": "Permissão",
   "form-title-create-product": "Criar Novo Produto",
   "form-title-edit-product": "Editar Produto",
