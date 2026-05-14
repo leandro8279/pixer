@@ -11,12 +11,21 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.0",
+    "classnames": "^2.5.1",
+    "date-fns": "^4.1.0",
+    "framer-motion": "^12.38.0",
     "i18next": "^26.1.0",
     "i18next-browser-languagedetector": "^8.2.1",
     "i18next-http-backend": "^4.0.0",
+    "rc-pagination": "^5.1.0",
+    "rc-table": "^7.55.1",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
+    "react-hook-form": "^7.75.0",
     "react-i18next": "^17.0.7",
+    "react-router-dom": "^7.15.0",
+    "swiper": "^12.1.4",
+    "tailwind-merge": "^3.6.0",
     "tailwindcss": "^4.3.0"
   },
   "devDependencies": {
