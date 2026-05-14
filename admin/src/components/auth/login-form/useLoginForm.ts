@@ -1,15 +1,20 @@
+import { useLocation } from 'wouter';
+
+import { useRootStore } from '@/contexts/root-context';
+import { Routes } from '@/config/routes';
 import type { LoginInput } from '@/types';
-import { useLocalObservable } from 'mobx-react-lite';
 
 export const useLoginForm = () => {
-  const store = useLocalObservable(() => ({
-    errorMessage: '',
-    setErrorMessage(message: string) {
-      this.errorMessage = message;
-    },
-  }));
+  const { auth } = useRootStore();
+  const [, navigate] = useLocation();
 
-  function handleSubmit({ email, password }: LoginInput) {}
+  async function handleSubmit({ email, password }: LoginInput) {
+    await auth.login.mutateAsync({ email, password });
 
-  return { store, handleSubmit };
+    if (auth.login.isSuccess) {
+      navigate(Routes.dashboard);
+    }
+  }
+
+  return { mutation: auth.login, handleSubmit };
 };

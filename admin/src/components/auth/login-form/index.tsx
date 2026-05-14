@@ -20,7 +20,7 @@ import type { LoginInput } from '@/types';
 
 export function LoginForm() {
   const { t } = useTranslation();
-  const { store, handleSubmit } = useLoginForm();
+  const { mutation, handleSubmit } = useLoginForm();
 
   return (
     <React.Fragment>
@@ -44,9 +44,13 @@ export function LoginForm() {
               className='mb-4'
               forgotPageLink={Routes.forgotPassword}
             />
-            <Button className='w-full' loading={false} disabled={false}>
-              {t('form:button-label-login')}
-            </Button>
+            <Observer>
+              {() => (
+                <Button className='w-full' loading={mutation.isLoading} disabled={mutation.isLoading}>
+                  {t('form:button-label-login')}
+                </Button>
+              )}
+            </Observer>
 
             <div className='relative mt-8 mb-6 flex flex-col items-center justify-center text-sm text-heading sm:mt-11 sm:mb-8'>
               <hr className='w-full' />
@@ -67,13 +71,13 @@ export function LoginForm() {
       </Form>
       <Observer>
         {() => (
-          <RenderComponent conditional={store.errorMessage}>
+          <RenderComponent conditional={mutation.isError && mutation.error}>
             <Alert
               variant='error'
               closeable={true}
               className='mt-5'
-              message={t(store.errorMessage)}
-              onClose={() => store.setErrorMessage('')}
+              message={mutation.error?.message ?? ''}
+              onClose={() => {}}
             />
           </RenderComponent>
         )}
