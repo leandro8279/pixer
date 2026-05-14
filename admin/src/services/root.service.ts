@@ -1,4 +1,5 @@
 import { BaseService } from './base.service';
+import { AuthService, authService } from './auth.service';
 
 class RootService extends BaseService {
   private static _instance: RootService | null = null;
@@ -14,14 +15,7 @@ class RootService extends BaseService {
     return RootService._instance;
   }
 
-  auth = {
-    login: <T>(data: unknown) => this.post<T>('/auth/login', data),
-    register: <T>(data: unknown) => this.post<T>('/auth/register', data),
-    logout: <T>() => this.post<T>('/auth/logout'),
-    me: <T>() => this.get<T>('/auth/me'),
-    refreshToken: <T>(data: unknown) =>
-      this.post<T>('/auth/token/refresh', data),
-  };
+  auth: AuthService = authService;
 
   settings = {
     all: <T>(params?: unknown) =>

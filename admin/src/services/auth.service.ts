@@ -2,7 +2,7 @@ import { API_ENDPOINTS } from '@/utils/constants';
 import type { LoginRequest, LoginResponse, RegisterRequest, RegisterResponse } from '@/types';
 import { BaseService } from './base.service';
 
-class AuthService extends BaseService {
+export class AuthService extends BaseService {
   private static _instance: AuthService | null = null;
 
   private constructor() {
