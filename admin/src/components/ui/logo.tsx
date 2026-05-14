@@ -8,7 +8,7 @@ import { useAtom } from 'jotai';
 import { miniSidebarInitialValue } from '@/utils/constants';
 import { useWindowSize } from '@/utils/use-window-size';
 import { RESPONSIVE_WIDTH } from '@/utils/constants';
-import { useRouter } from 'next/router';
+import { useRouter } from '@/hooks/useRouter';
 import { useSettingsQuery } from '@/data/settings';
 import RenderComponent from '@/components/common/render-component';
 

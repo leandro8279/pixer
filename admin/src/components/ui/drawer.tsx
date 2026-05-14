@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   disableBodyScroll,
@@ -9,7 +9,7 @@ import cn from 'classnames';
 import { fadeInRight } from '@/utils/motion/fade-in-right';
 import { fadeInLeft } from '@/utils/motion/fade-in-left';
 import { fadeInOut } from '@/utils/motion/fade-in-out';
-import { useRouter } from 'next/router';
+import { useRouter } from '@/hooks/useRouter';
 import { Dialog } from '@headlessui/react';
 import RenderComponent from '@/components/common/render-component';
 
