@@ -17,22 +17,30 @@ export class AuthStore {
   role: string | null = null;
   emailVerified = false;
 
-  readonly loginMutation: MobxMutation<LoginResponse, Error, LoginRequest>;
-  readonly registerMutation: MobxMutation<RegisterResponse, Error, RegisterRequest>;
+  #loginMutation: MobxMutation<LoginResponse, Error, LoginRequest>;
+  #registerMutation: MobxMutation<RegisterResponse, Error, RegisterRequest>;
 
   constructor(private readonly service: RootService) {
-    makeAutoObservable(this);
+    makeAutoObservable(this, { login: false, register: false });
     this.rehydrate();
 
-    this.loginMutation = new MobxMutation<LoginResponse, Error, LoginRequest>({
+    this.#loginMutation = new MobxMutation<LoginResponse, Error, LoginRequest>({
       mutationFn: (data) => this.service.auth.login(data),
       onSuccess: (data) => this.setSession(data),
     });
 
-    this.registerMutation = new MobxMutation<RegisterResponse, Error, RegisterRequest>({
+    this.#registerMutation = new MobxMutation<RegisterResponse, Error, RegisterRequest>({
       mutationFn: (data) => this.service.auth.register(data),
       onSuccess: (data) => this.setSession(data),
     });
+  }
+
+  get login() {
+    return this.#loginMutation;
+  }
+
+  get register() {
+    return this.#registerMutation;
   }
 
   get isAuthenticated(): boolean {
@@ -85,7 +93,7 @@ export class AuthStore {
   }
 
   dispose() {
-    this.loginMutation.dispose();
-    this.registerMutation.dispose();
+    this.#loginMutation.dispose();
+    this.#registerMutation.dispose();
   }
 }
