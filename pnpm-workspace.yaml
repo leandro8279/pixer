@@ -1,5 +1,6 @@
 packages:
   - admin
+  - backend
 
 autoInstallPeers: false
 ignoredBuiltDependencies:
