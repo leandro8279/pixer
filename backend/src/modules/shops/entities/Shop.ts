@@ -1,8 +1,22 @@
+import { User } from '@/modules/auth/entities/User';
+import { Category } from '@/modules/catalogs/entities/Category';
+import { OwnershipTransfer } from '@/modules/ownerships/entities/OwnershipTransfer';
+
 import {
-  Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn,
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  JoinTable,
+  ManyToMany,
+  ManyToOne,
+  OneToMany,
+  OneToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 
-import { User } from '@/modules/auth/entities/User';
+import { Balance } from './Balance';
 
 @Entity('shops')
 export class Shop {
@@ -48,4 +62,18 @@ export class Shop {
   @ManyToOne(() => User, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'owner_id' })
   owner: User;
+
+  @ManyToMany(() => Category)
+  @JoinTable({
+    name: 'category_shop',
+    joinColumn: { name: 'shop_id', referencedColumnName: 'id' },
+    inverseJoinColumn: { name: 'category_id', referencedColumnName: 'id' },
+  })
+  categories: Category[];
+
+  @OneToMany(() => OwnershipTransfer, (transfer) => transfer.shop)
+  ownerShipTransfers: OwnershipTransfer[];
+
+  @OneToOne(() => Balance, (balance) => balance.shop)
+  balance: Balance | null;
 }
