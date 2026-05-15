@@ -1,5 +1,15 @@
+import { Shop } from '@/modules/shops/entities/Shop';
+
 import {
-  Column, CreateDateColumn, DeleteDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn,
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToMany,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 
 import { Type } from './Type';
@@ -49,4 +59,7 @@ export class Category {
   @ManyToOne(() => Type, { nullable: true, onDelete: 'CASCADE' })
   @JoinColumn({ name: 'type_id' })
   type: Type | null;
+
+  @ManyToMany(() => Shop)
+  shops: Shop[];
 }
