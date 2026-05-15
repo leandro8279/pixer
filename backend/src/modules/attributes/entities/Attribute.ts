@@ -2,19 +2,24 @@ import {
   Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn,
 } from 'typeorm';
 
-import { User } from '@/modules/auth/entities/User';
 import { Shop } from '@/modules/shops/entities/Shop';
 
-@Entity('conversations')
-export class Conversation {
+@Entity('attributes')
+export class Attribute {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ name: 'user_id', type: 'uuid' })
-  userId: string;
+  @Column({ type: 'varchar' })
+  slug: string;
 
-  @Column({ name: 'shop_id', type: 'uuid' })
-  shopId: string;
+  @Column({ type: 'varchar' })
+  name: string;
+
+  @Column({ name: 'shop_id', type: 'uuid', nullable: true })
+  shopId: string | null;
+
+  @Column({ type: 'varchar', nullable: true })
+  language: string | null;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
@@ -22,11 +27,7 @@ export class Conversation {
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
 
-  @ManyToOne(() => User, { onDelete: 'CASCADE' })
-  @JoinColumn({ name: 'user_id' })
-  user: User;
-
-  @ManyToOne(() => Shop, { onDelete: 'CASCADE' })
+  @ManyToOne(() => Shop, { nullable: true, onDelete: 'CASCADE' })
   @JoinColumn({ name: 'shop_id' })
-  shop: Shop;
+  shop: Shop | null;
 }

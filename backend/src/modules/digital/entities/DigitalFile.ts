@@ -2,7 +2,7 @@ import {
   Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn,
 } from 'typeorm';
 
-import { Attachment } from '@/modules/product/entities/Attachment';
+import { Attachment } from '@/modules/products/entities/Attachment';
 
 @Entity('digital_files')
 export class DigitalFile {

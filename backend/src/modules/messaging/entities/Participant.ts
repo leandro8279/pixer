@@ -4,7 +4,7 @@ import {
 
 import { ParticipantType } from '@/shared/enums';
 import { User } from '@/modules/auth/entities/User';
-import { Shop } from '@/modules/shop/entities/Shop';
+import { Shop } from '@/modules/shops/entities/Shop';
 import { Conversation } from './Conversation';
 import { Message } from './Message';
 

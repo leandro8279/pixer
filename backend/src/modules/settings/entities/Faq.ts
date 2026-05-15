@@ -3,7 +3,7 @@ import {
 } from 'typeorm';
 
 import { User } from '@/modules/auth/entities/User';
-import { Shop } from '@/modules/shop/entities/Shop';
+import { Shop } from '@/modules/shops/entities/Shop';
 
 @Entity('faqs')
 export class Faq {
