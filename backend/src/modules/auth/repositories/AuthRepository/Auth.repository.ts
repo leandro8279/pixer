@@ -10,7 +10,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 
 import { Repository } from 'typeorm';
 
-import { CreateUserData, IAuthRepository } from './IAuth.repository';
+import { CreateUserData, IAuthRepository, UserWithRelations } from './IAuth.repository';
 
 @Injectable()
 export class AuthRepository implements IAuthRepository {
@@ -120,6 +120,19 @@ export class AuthRepository implements IAuthRepository {
         }),
       );
     }
+  }
+
+  async findUserWithRelationsById(id: string): Promise<UserWithRelations | null> {
+    const user = await this.userRepository.findOne({
+      where: { id },
+      relations: { modelHasRoles: { role: true } },
+    });
+    if (!user) return null;
+
+    const wallet = await this.walletRepository.findOne({ where: { customerId: id } });
+    const roles = user.modelHasRoles.map((mhr) => mhr.role);
+
+    return Object.assign(user, { wallet: wallet ?? null, roles });
   }
 
   async isTokenRevoked(tokenHash: string): Promise<boolean> {
