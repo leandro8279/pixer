@@ -135,6 +135,15 @@ export class AuthRepository implements IAuthRepository {
     return Object.assign(user, { wallet: wallet ?? null, roles });
   }
 
+  async revokeToken(tokenHash: string, expiresAt: Date): Promise<void> {
+    const existing = await this.revokedTokenRepository.findOne({ where: { tokenHash } });
+    if (!existing) {
+      await this.revokedTokenRepository.save(
+        this.revokedTokenRepository.create({ tokenHash, expiresAt }),
+      );
+    }
+  }
+
   async isTokenRevoked(tokenHash: string): Promise<boolean> {
     const record = await this.revokedTokenRepository.findOne({ where: { tokenHash } });
     if (!record) return false;

@@ -7,7 +7,9 @@ import { User } from '@/modules/auth/entities/User';
 import { Wallet } from '@/modules/auth/entities/Wallet';
 import { AUTH_REPOSITORY, AuthRepository } from '@/modules/auth/repositories';
 import {
-    LOGIN_SERVICE, LoginService, REGISTER_SERVICE, RegisterService
+    LOGIN_SERVICE, LoginService,
+    LOGOUT_SERVICE, LogoutService,
+    REGISTER_SERVICE, RegisterService,
 } from '@/modules/auth/services';
 import { JwtStrategy } from '@/modules/auth/strategies/Jwt.strategy';
 import { Module } from '@nestjs/common';
@@ -30,6 +32,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     { provide: AUTH_REPOSITORY, useClass: AuthRepository },
     { provide: REGISTER_SERVICE, useClass: RegisterService },
     { provide: LOGIN_SERVICE, useClass: LoginService },
+    { provide: LOGOUT_SERVICE, useClass: LogoutService },
     JwtStrategy,
   ],
 })
