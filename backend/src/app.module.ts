@@ -1,8 +1,11 @@
 import { RequestLoggerMiddleware } from '@/common/middlewares/RequestLogger.middleware';
 import { AuthModule } from '@/modules/auth/auth.module';
+import { SettingsModule } from '@/modules/settings/settings.module';
 import { DatabaseModule } from '@/shared/database/database.module';
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+
+import { ShopsModule } from './modules/shops/shops.module';
 
 @Module({
   imports: [
@@ -12,6 +15,8 @@ import { ConfigModule } from '@nestjs/config';
     }),
     DatabaseModule,
     AuthModule,
+    SettingsModule,
+    ShopsModule,
   ],
   controllers: [],
   providers: [],
