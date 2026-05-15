@@ -4,11 +4,10 @@ import type {
   MutationObserverResult,
   QueryClient,
 } from '@tanstack/react-query';
+import { queryClient } from '@/config/query-client';
 import { MutationObserver } from '@tanstack/react-query';
 
 import { observable, runInAction } from 'mobx';
-
-import { queryClient } from '@/config/query-client';
 
 export class MobxMutation<TData = unknown, TError = unknown, TVariables = void, TContext = unknown> {
   private unsubscribe?: () => void;

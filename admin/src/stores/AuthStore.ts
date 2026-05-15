@@ -1,8 +1,10 @@
+import { AUTH_CRED, PERMISSIONS, TOKEN } from '@/utils/constants';
+
 import { makeAutoObservable } from 'mobx';
 
-import type { LoginRequest, LoginResponse, RegisterRequest, RegisterResponse, UserPermission } from '@/types';
-import { AUTH_CRED, TOKEN, PERMISSIONS } from '@/utils/constants';
 import { MobxMutation } from './MobxMutation';
+
+import type { LoginRequest, LoginResponse, RegisterRequest, RegisterResponse, UserPermission } from '@/types';
 import type { RootService } from '@/services/root.service';
 
 interface AuthCredential {
