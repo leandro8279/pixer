@@ -1,98 +1,316 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Pixer API — Backend
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+API REST do marketplace multi-vendor **Pixer**, construída com **NestJS** e **TypeORM**.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+---
 
-## Description
+## Sumário
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- [Visão Geral](#visão-geral)
+- [Tecnologias](#tecnologias)
+- [Pré-requisitos](#pré-requisitos)
+- [Instalação](#instalação)
+- [Variáveis de Ambiente](#variáveis-de-ambiente)
+- [Executando o Projeto](#executando-o-projeto)
+- [Estrutura de Pastas](#estrutura-de-pastas)
+- [Endpoints da API](#endpoints-da-api)
+- [Autenticação](#autenticação)
+- [Banco de Dados](#banco-de-dados)
+- [Documentação Swagger](#documentação-swagger)
 
-## Project setup
+---
 
-```bash
-$ pnpm install
-```
+## Visão Geral
 
-## Compile and run the project
+O backend do Pixer fornece toda a lógica de negócio para um marketplace multi-vendor, incluindo:
 
-```bash
-# development
-$ pnpm run start
+- Autenticação e autorização com JWT
+- Gerenciamento de lojas e vendedores
+- Controle de produtos, pedidos e estoque
+- Sistema de revogação de tokens
+- Configurações globais da plataforma
 
-# watch mode
-$ pnpm run start:dev
+---
 
-# production mode
-$ pnpm run start:prod
-```
+## Tecnologias
 
-## Run tests
+| Tecnologia | Versão | Função |
+|---|---|---|
+| Node.js | 24+ | Runtime |
+| NestJS | 11 | Framework principal |
+| TypeORM | 0.3 | ORM |
+| PostgreSQL | — | Banco de dados |
+| Passport.js + JWT | — | Autenticação |
+| Swagger / Scalar | — | Documentação da API |
+| class-validator | — | Validação de DTOs |
+| bcryptjs | — | Hash de senhas |
 
-```bash
-# unit tests
-$ pnpm run test
+---
 
-# e2e tests
-$ pnpm run test:e2e
+## Pré-requisitos
 
-# test coverage
-$ pnpm run test:cov
-```
+- Node.js 20+
+- pnpm 10+
+- PostgreSQL 14+
 
-## Deployment
+---
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+## Instalação
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+Na raiz do monorepo:
 
 ```bash
-$ pnpm install -g @nestjs/mau
-$ mau deploy
+pnpm install
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+---
 
-## Resources
+## Variáveis de Ambiente
 
-Check out a few resources that may come in handy when working with NestJS:
+Crie um arquivo `.env` dentro da pasta `backend/` com as seguintes variáveis:
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+```env
+# Servidor
+BACKEND_PORT=3001
+NODE_ENV=development
 
-## Support
+# JWT
+JWT_SECRET=sua_chave_secreta_aqui
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+# Banco de Dados
+DATABASE_URL=postgresql://usuario:senha@localhost:5432/pixer
+PGHOST=localhost
+PGPORT=5432
+PGUSER=postgres
+PGPASSWORD=postgres
+PGDATABASE=pixer
+```
 
-## Stay in touch
+> **Atenção:** nunca use o valor padrão `changeme` para `JWT_SECRET` em produção.
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+---
 
-## License
+## Executando o Projeto
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+```bash
+# Modo de desenvolvimento (com watch)
+pnpm --filter @workspace/backend run dev
+
+# Build de produção
+pnpm --filter @workspace/backend run build
+
+# Executar build de produção
+pnpm --filter @workspace/backend run start:prod
+
+# Popular banco com dados iniciais
+pnpm --filter @workspace/backend run seed
+```
+
+O servidor inicia em `http://localhost:3001` por padrão.
+
+---
+
+## Estrutura de Pastas
+
+```
+backend/src/
+├── app.module.ts                    # Módulo raiz
+├── main.ts                          # Ponto de entrada
+│
+├── common/
+│   ├── decorators/
+│   │   └── CurrentUser.ts           # Decorator @CurrentUser() e tipo AuthenticatedUser
+│   ├── filters/
+│   │   └── HttpExceptionFilter.ts   # Formatação padronizada de erros HTTP
+│   ├── interceptors/
+│   │   ├── LoggingInterceptor.ts    # Log de todas as requisições
+│   │   └── TimeoutInterceptor.ts    # Timeout global de 30s
+│   └── middlewares/
+│       └── RequestLogger.middleware.ts
+│
+├── config/
+│   └── SwaggerConfig.ts             # Configuração do Swagger/Scalar
+│
+├── modules/
+│   ├── auth/                        # Módulo de autenticação
+│   │   ├── controllers/
+│   │   │   └── Auth.controller.ts   # POST /auth/register, POST /auth/token
+│   │   ├── dto/                     # LoginRequest/Response, RegisterRequest/Response
+│   │   ├── entities/                # User, Role, Permission, RevokedToken, Wallet...
+│   │   ├── guards/
+│   │   │   └── JwtAuth.guard.ts     # Guarda JWT com verificação de revogação
+│   │   ├── repositories/
+│   │   │   └── AuthRepository/      # IAuthRepository + implementação TypeORM
+│   │   ├── services/
+│   │   │   ├── LoginService/
+│   │   │   └── RegisterService/
+│   │   └── strategies/
+│   │       └── Jwt.strategy.ts      # Estratégia Passport JWT
+│   │
+│   ├── settings/                    # Configurações globais — GET /settings
+│   └── shops/                       # Lojas — GET /shops/:id
+│
+└── shared/
+    └── database/                    # DatabaseModule (TypeORM) e seeds
+```
+
+---
+
+## Endpoints da API
+
+### Autenticação — `/auth`
+
+#### `POST /auth/register`
+Registra um novo usuário na plataforma.
+
+**Body:**
+```json
+{
+  "name": "João Silva",
+  "email": "joao@exemplo.com",
+  "password": "senha123",
+  "permission": "store_owner"
+}
+```
+
+**Resposta `201`:**
+```json
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "permissions": ["manage_shop"],
+  "role": "store_owner"
+}
+```
+
+---
+
+#### `POST /auth/token`
+Realiza login e retorna um token JWT.
+
+**Body:**
+```json
+{
+  "email": "joao@exemplo.com",
+  "password": "senha123"
+}
+```
+
+**Resposta `200`:**
+```json
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "permissions": ["manage_shop"],
+  "email_verified": true,
+  "role": "store_owner"
+}
+```
+
+---
+
+### Configurações — `/settings`
+
+#### `GET /settings`
+Retorna as configurações globais da plataforma.
+
+**Query params:**
+
+| Parâmetro | Tipo | Obrigatório | Descrição |
+|---|---|---|---|
+| `language` | `string` | Não | Idioma das configurações (ex: `pt`, `en`) |
+
+---
+
+### Lojas — `/shops`
+
+#### `GET /shops/:id`
+Retorna os dados de uma loja pelo ID ou slug.
+
+**Path params:**
+
+| Parâmetro | Tipo | Descrição |
+|---|---|---|
+| `id` | `string` | ID ou slug da loja |
+
+**Query params:**
+
+| Parâmetro | Tipo | Descrição |
+|---|---|---|
+| `language` | `string` | Idioma dos dados retornados |
+
+> Se o solicitante for o proprietário da loja ou um administrador, a resposta inclui o campo `balance`.
+
+---
+
+## Autenticação
+
+O sistema utiliza **JWT (JSON Web Token)** com suporte a **revogação de tokens**.
+
+### Fluxo completo
+
+```
+1. POST /auth/token com email e senha
+           ↓
+2. Servidor valida credenciais → retorna JWT
+           ↓
+3. Cliente envia: Authorization: Bearer <token>
+           ↓
+4. JwtStrategy valida assinatura com JWT_SECRET e decodifica o payload
+           ↓
+5. JwtAuthGuard verifica se o token está na tabela revoked_tokens
+           ↓
+6. req.user populado com { id, email } → controller recebe a requisição
+```
+
+### Protegendo uma rota
+
+```typescript
+import { UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from '@/modules/auth/guards/JwtAuth.guard';
+import { CurrentUser, AuthenticatedUser } from '@/common/decorators/CurrentUser';
+
+@Get('perfil')
+@UseGuards(JwtAuthGuard)
+getPerfil(@CurrentUser() user: AuthenticatedUser) {
+  return user; // { id: string, email: string }
+}
+```
+
+### Revogação de tokens
+
+Tokens revogados ficam armazenados na tabela `revoked_tokens` com um hash SHA-256. A cada requisição autenticada, o guard:
+
+1. Calcula o hash do token recebido
+2. Busca o hash na tabela
+3. Se encontrado e ainda dentro da validade → rejeita com `401 Unauthorized`
+4. Se encontrado mas expirado → remove o registro e permite a requisição
+
+---
+
+## Banco de Dados
+
+O projeto usa **TypeORM** com `synchronize: true` em desenvolvimento (o schema é criado/atualizado automaticamente).
+
+### Entidades principais
+
+| Entidade | Tabela | Descrição |
+|---|---|---|
+| `User` | `users` | Usuários da plataforma |
+| `Role` | `roles` | Papéis (ex: admin, store_owner, customer) |
+| `Permission` | `permissions` | Permissões granulares |
+| `ModelHasRole` | `model_has_roles` | Vínculo usuário ↔ papel |
+| `ModelHasPermission` | `model_has_permissions` | Vínculo usuário ↔ permissão |
+| `RevokedToken` | `revoked_tokens` | Tokens JWT revogados |
+| `Wallet` | `wallets` | Carteira de pontos do usuário |
+| `PasswordReset` | `password_resets` | Solicitações de redefinição de senha |
+
+---
+
+## Documentação Swagger
+
+Com o servidor rodando, acesse a documentação interativa em:
+
+```
+http://localhost:3001/api
+```
+
+A documentação é gerada automaticamente via `@nestjs/swagger` e exibida com o **Scalar API Reference**.
