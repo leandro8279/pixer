@@ -22,28 +22,29 @@ export class ShopsRepository implements IShopsRepository {
 
   public async findShopByIdOrSlug(idOrSlug: string, language: string, includeBalance: boolean): Promise<Shop | null> {
     const isId = /^\d+$/.test(String(idOrSlug));
-    const where = isId ? { id: idOrSlug } : { slug: String(idOrSlug) };
 
-    // const include: Record<string, unknown> = {
-    //   categories: true,
-    //   owner: { include: { profile: true } },
-    //   ownership_transfers: true,
-    //   _count: {
-    //     select: {
-    //       orders: true,
-    //       products: { where: { language } },
-    //     },
-    //   },
-    // };
+    const qb = this.repository
+      .createQueryBuilder('shop')
+      .leftJoin('shop.owner', 'owner')
+      .leftJoinAndSelect('shop.categories', 'categories')
+      .leftJoin('owner.profile', 'profile')
+      .addSelect(['owner.id', 'owner.email', 'profile.id', 'profile.name'])
+      .leftJoinAndSelect('shop.ownerShipTransfers', 'ownerShipTransfers')
+      .loadRelationCountAndMap('shop.ordersCount', 'shop.orders')
+      .loadRelationCountAndMap('shop.productsCount', 'shop.products', 'products', (productsQb) =>
+        productsQb.where('products.language = :language', { language }),
+      );
 
-    return this.repository.findOne({
-      where: { ...where },
-      relations: {
-        // owner: true,
-        // categories: true,
-        balance: includeBalance,
-        // ownerShipTransfers: true,
-      },
-    });
+    if (includeBalance) {
+      qb.leftJoinAndSelect('shop.balance', 'balance');
+    }
+
+    if (isId) {
+      qb.where('shop.id = :id', { id: idOrSlug });
+    } else {
+      qb.where('shop.slug = :slug', { slug: String(idOrSlug) });
+    }
+
+    return qb.getOne();
   }
 }

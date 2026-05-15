@@ -64,6 +64,8 @@ export class GetShopService implements IGetShopService {
       is_active: shop.isActive,
       address: shop.address,
       settings: shop.settings,
+      products_count: shop.productsCount,
+      orders_count: shop.ordersCount,
       created_at: shop.createdAt,
       updated_at: shop.updatedAt,
     };

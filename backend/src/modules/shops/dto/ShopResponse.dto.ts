@@ -75,6 +75,18 @@ export class ShopResponseDTO {
   })
   balance?: ShopBalanceResponseDTO | null;
 
+  @ApiProperty({
+    description: 'Quantidade total de produtos da loja neste idioma',
+    example: 42,
+  })
+  products_count: number;
+
+  @ApiProperty({
+    description: 'Quantidade total de pedidos da loja',
+    example: 150,
+  })
+  orders_count: number;
+
   @ApiProperty({ example: '2024-01-01T00:00:00.000Z' })
   created_at: Date;
 

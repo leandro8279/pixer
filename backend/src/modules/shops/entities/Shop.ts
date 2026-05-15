@@ -53,6 +53,9 @@ export class Shop {
   @Column({ type: 'json', nullable: true })
   notifications: Record<string, unknown> | null;
 
+  productsCount: number;
+  ordersCount: number;
+
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
 
