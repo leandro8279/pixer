@@ -43,3 +43,56 @@ export enum Permission {
   Staff = 'staff',
   Customer = 'customer',
 }
+
+export interface SettingsOptions {
+  siteTitle?: string;
+  siteSubtitle?: string;
+  currency?: string;
+  defaultAi?: string;
+  paymentGateway?: string;
+  defaultPaymentGateway?: string;
+  useOtp?: boolean;
+  useAi?: boolean;
+  contactDetails?: ContactDetails;
+  minimumOrderAmount?: number;
+  currencyToWalletRatio?: number;
+  signupPoints?: number;
+  maxShopDistance?: number;
+  maximumQuestionLimit?: number;
+  deliveryTime?: DeliveryTime[];
+  logo?: Attachment;
+  collapseLogo?: Attachment;
+  taxClass?: string;
+  shippingClass?: string;
+  seo?: SeoSettings;
+  google?: GoogleSettings;
+  facebook?: FacebookSettings;
+  useEnableGateway?: boolean;
+  currencyOptions?: SettingCurrencyOptions;
+  guestCheckout: boolean;
+  smsEvent?: SmsEvent;
+  emailEvent?: EmailEvent;
+  server_info?: ServerInfo;
+  useGoogleMap?: boolean;
+  isProductReview?: boolean;
+  freeShipping?: boolean;
+  freeShippingAmount?: number;
+  pushNotification?: PushNotification;
+  enableTerms?: boolean;
+  enableCoupons?: boolean;
+  maintenance: Maintenance;
+  isUnderMaintenance: boolean;
+  enableEmailForDigitalProduct?: boolean;
+  isPromoPopUp?: boolean;
+  promoPopup?: PromoPopupFormValues;
+  reviewSystem?: string;
+  isMultiCommissionRate?: boolean;
+}
+
+export interface Settings {
+  id: string;
+  options: SettingsOptions;
+  language: string;
+  created_at: string;
+  updated_at: string;
+}

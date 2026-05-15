@@ -1,7 +1,8 @@
 import { API_ENDPOINTS } from '@/utils/constants';
-import type { LoginRequest, LoginResponse, RegisterRequest, RegisterResponse } from '@/types';
+
 import { BaseService } from './base.service';
 
+import type { LoginRequest, LoginResponse, RegisterRequest, RegisterResponse } from '@/types';
 export class AuthService extends BaseService {
   private static _instance: AuthService | null = null;
 

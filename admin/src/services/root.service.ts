@@ -1,5 +1,6 @@
-import { BaseService } from './base.service';
 import { AuthService, authService } from './auth.service';
+import { BaseService } from './base.service';
+import { SettingService } from './setting.service';
 
 export class RootService extends BaseService {
   private static _instance: RootService | null = null;
@@ -15,22 +16,8 @@ export class RootService extends BaseService {
     return RootService._instance;
   }
 
-  auth: AuthService = authService;
-
-  settings = {
-    all: <T>(params?: unknown) =>
-      this.get<T>('/settings', { params } as any),
-    update: <T>(data: unknown) => this.put<T>('/settings', data),
-  };
-
-  upload = {
-    upload: <T>(formData: FormData) =>
-      this.post<T>('/attachments', formData, {
-        headers: { 'Content-Type': 'multipart/form-data' },
-      }),
-    delete: <T>(id: number | string) =>
-      this.delete<T>(`/attachments/${id}`),
-  };
+  readonly auth: AuthService = authService;
+  readonly settings = new SettingService();
 }
 
 export const rootService = RootService.getInstance();
