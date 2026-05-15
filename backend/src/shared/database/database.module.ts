@@ -18,7 +18,8 @@ import path from 'path';
       entities: [path.join(__dirname, '..', '..', 'modules', '**', 'entities', '*.{js,ts}')],
       synchronize: true,
       logging: process.env.NODE_ENV === 'development',
-      ssl: process.env.DATABASE_URL ? { rejectUnauthorized: false } : false,
+      // ssl: process.env.DATABASE_URL ? { rejectUnauthorized: false } : false,
+      ssl: false,
     }),
   ],
 })
