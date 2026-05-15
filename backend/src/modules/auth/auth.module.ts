@@ -9,6 +9,7 @@ import { AUTH_REPOSITORY, AuthRepository } from '@/modules/auth/repositories';
 import {
     LOGIN_SERVICE, LoginService, REGISTER_SERVICE, RegisterService
 } from '@/modules/auth/services';
+import { JwtStrategy } from '@/modules/auth/strategies/Jwt.strategy';
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
@@ -29,6 +30,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     { provide: AUTH_REPOSITORY, useClass: AuthRepository },
     { provide: REGISTER_SERVICE, useClass: RegisterService },
     { provide: LOGIN_SERVICE, useClass: LoginService },
+    JwtStrategy,
   ],
 })
 export class AuthModule {}
