@@ -8,11 +8,14 @@ import { Routes } from '@/config/routes';
 import { LoginPage } from '@/pages/login';
 import { RegisterPage } from '@/pages/register';
 
-import { Route, Router as WouterRouter, Switch } from 'wouter';
+import { Route, Router as WouterRouter, Switch, Redirect } from 'wouter';
 
 function Router() {
   return (
     <Switch>
+      <Route path={Routes.dashboard}>
+        <Redirect to={Routes.login} />
+      </Route>
       <Route path={Routes.login} component={LoginPage} />
       <Route path={Routes.register} component={RegisterPage} />
     </Switch>
