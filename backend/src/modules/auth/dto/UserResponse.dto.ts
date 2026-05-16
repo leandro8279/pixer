@@ -108,7 +108,7 @@ export class UserResponseDTO {
   wallet: WalletDTO | null;
 
   @ApiProperty({ type: [AddressDTO] })
-  addresses: AddressDTO[];
+  address: AddressDTO[];
 
   @ApiProperty({ type: [ShopSummaryDTO], description: 'Lojas das quais o usuário é proprietário' })
   owned_shops: ShopSummaryDTO[];

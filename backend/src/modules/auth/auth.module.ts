@@ -6,6 +6,7 @@ import { Permission } from '@/modules/auth/entities/Permission';
 import { Role } from '@/modules/auth/entities/Role';
 import { User } from '@/modules/auth/entities/User';
 import { Wallet } from '@/modules/auth/entities/Wallet';
+import { USER_FORMATTER, UserFormatter } from '@/modules/auth/formatters';
 import { AUTH_REPOSITORY, AuthRepository } from '@/modules/auth/repositories';
 import {
     LOGIN_SERVICE, LoginService,
@@ -32,6 +33,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
   controllers: [AuthController, UsersController],
   providers: [
     { provide: AUTH_REPOSITORY, useClass: AuthRepository },
+    { provide: USER_FORMATTER, useClass: UserFormatter },
     { provide: REGISTER_SERVICE, useClass: RegisterService },
     { provide: LOGIN_SERVICE, useClass: LoginService },
     { provide: LOGOUT_SERVICE, useClass: LogoutService },
