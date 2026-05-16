@@ -1,0 +1,9 @@
+import { ApiProperty } from '@nestjs/swagger';
+import { IsNotEmpty, IsString } from 'class-validator';
+
+export class {{pascalCase name}}RequestDTO {
+  @ApiProperty({ description: '', example: '' })
+  @IsNotEmpty({ message: '' })
+  @IsString({ message: '' })
+  field: string;
+}

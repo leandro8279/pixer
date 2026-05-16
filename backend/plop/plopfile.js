@@ -98,6 +98,63 @@ module.exports = function (plop) {
     ],
   });
 
+  plop.setGenerator('dto', {
+    description: 'Gerar DTO (Request + Response)',
+    prompts: [
+      {
+        type: 'input',
+        name: 'module',
+        message: 'Módulo (ex: products)',
+      },
+      {
+        type: 'input',
+        name: 'name',
+        message: 'Nome (ex: CreateProduct)',
+      },
+    ],
+    actions: [
+      {
+        type: 'add',
+        force: true,
+        path: path.join(
+          process.cwd(),
+          'src/modules/{{module}}/dto/{{pascalCase name}}Request.dto.ts',
+        ),
+        templateFile: 'templates/dto.request.hbs',
+      },
+      {
+        type: 'add',
+        force: true,
+        path: path.join(
+          process.cwd(),
+          'src/modules/{{module}}/dto/{{pascalCase name}}Response.dto.ts',
+        ),
+        templateFile: 'templates/dto.response.hbs',
+      },
+      {
+        type: 'add',
+        path: path.join(process.cwd(), 'src/modules/{{module}}/dto/index.ts'),
+        template: '',
+        skipIfExists: true,
+      },
+      {
+        type: 'modify',
+        path: path.join(process.cwd(), 'src/modules/{{module}}/dto/index.ts'),
+        transform: (content) => {
+          const name = process.argv[6];
+
+          const reqLine  = `export * from './${name}Request.dto';`;
+          const respLine = `export * from './${name}Response.dto';`;
+
+          let result = content;
+          if (!result.includes(reqLine))  result += `${reqLine}\n`;
+          if (!result.includes(respLine)) result += `${respLine}\n`;
+          return result;
+        },
+      },
+    ],
+  });
+
   plop.setGenerator('formatter', {
     description: 'Gerar Formatter',
     prompts: [
