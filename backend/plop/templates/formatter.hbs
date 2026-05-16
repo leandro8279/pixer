@@ -1,0 +1,10 @@
+import { Injectable } from '@nestjs/common';
+
+import { I{{pascalCase name}}Formatter } from './I{{pascalCase name}}.formatter';
+
+@Injectable()
+export class {{pascalCase name}}Formatter implements I{{pascalCase name}}Formatter {
+  public format(params: I{{pascalCase name}}Formatter.Params): I{{pascalCase name}}Formatter.Result {
+    throw new Error('Method not implemented.');
+  }
+}

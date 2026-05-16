@@ -1,0 +1,16 @@
+import { DTO } from '@/modules/{{module}}/dto';
+import { {{singular module}} } from '@/modules/{{module}}/entities/{{singular module}}';
+
+export const {{toConstantCase name}}_FORMATTER = Symbol('I{{pascalCase name}}Formatter');
+
+export interface I{{pascalCase name}}Formatter {
+  format(params: I{{pascalCase name}}Formatter.Params): I{{pascalCase name}}Formatter.Result;
+}
+
+export namespace I{{pascalCase name}}Formatter {
+  export interface Params {
+    {{camelCase (singular module)}}: {{singular module}};
+  }
+
+  export type Result = DTO;
+}

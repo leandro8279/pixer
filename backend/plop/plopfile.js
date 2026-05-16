@@ -98,6 +98,75 @@ module.exports = function (plop) {
     ],
   });
 
+  plop.setGenerator('formatter', {
+    description: 'Gerar Formatter',
+    prompts: [
+      {
+        type: 'input',
+        name: 'module',
+        message: 'Módulo (ex: products)',
+      },
+      {
+        type: 'input',
+        name: 'name',
+        message: 'Nome (ex: Product)',
+      },
+    ],
+    actions: [
+      {
+        type: 'add',
+        force: true,
+        path: path.join(
+          process.cwd(),
+          'src/modules/{{module}}/formatters/{{pascalCase name}}Formatter/I{{pascalCase name}}.formatter.ts',
+        ),
+        templateFile: 'templates/formatter.interface.hbs',
+      },
+      {
+        type: 'add',
+        force: true,
+        path: path.join(
+          process.cwd(),
+          'src/modules/{{module}}/formatters/{{pascalCase name}}Formatter/{{pascalCase name}}.formatter.ts',
+        ),
+        templateFile: 'templates/formatter.hbs',
+      },
+      {
+        type: 'add',
+        force: true,
+        path: path.join(process.cwd(), 'src/modules/{{module}}/formatters/{{pascalCase name}}Formatter/index.ts'),
+        pattern: /(\/\/ PLOP EXPORTS)/g,
+      },
+      {
+        type: 'modify',
+        path: path.join(process.cwd(), 'src/modules/{{module}}/formatters/{{pascalCase name}}Formatter/index.ts'),
+        transform: (content) => {
+          const name = process.argv[6];
+
+          return `export * from './${name}.formatter';\nexport * from './I${name}.formatter';\n`;
+        },
+      },
+      {
+        type: 'add',
+        path: path.join(process.cwd(), 'src/modules/{{module}}/formatters/index.ts'),
+        template: '',
+        skipIfExists: true,
+      },
+      {
+        type: 'modify',
+        path: path.join(process.cwd(), 'src/modules/{{module}}/formatters/index.ts'),
+        transform: (content) => {
+          const name = process.argv[6];
+
+          const line = `export * from './${name}Formatter';`;
+
+          if (content.includes(line)) return content;
+          return content + `${line}\n`;
+        },
+      },
+    ],
+  });
+
   plop.setGenerator('repository', {
     description: 'Gerar Repository',
     prompts: [
