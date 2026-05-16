@@ -69,10 +69,13 @@ export async function seedAuth(pool: Pool): Promise<AuthData> {
     // ── Users ─────────────────────────────────────────────────────────────────
     type UserRow = { id: string; permName: string };
 
+    type AvatarInput = { original: string; thumbnail: string } | null;
+
     async function createUser(
       name: string,
       email: string,
       bio: string,
+      avatar: AvatarInput,
       totalPoints: number,
       availablePoints: number,
     ): Promise<string> {
@@ -87,10 +90,12 @@ export async function seedAuth(pool: Pool): Promise<AuthData> {
         [userId, name, email, hash, now, now],
       );
 
+      const avatarJson = avatar ? JSON.stringify({ id: null, ...avatar }) : null;
+
       await client.query(
-        `INSERT INTO user_profiles (id, bio, customer_id, created_at, updated_at)
-         VALUES ($1, $2, $3, $4, $4)`,
-        [profileId, bio, userId, now],
+        `INSERT INTO user_profiles (id, bio, customer_id, avatar, created_at, updated_at)
+         VALUES ($1, $2, $3, $4, $5, $5)`,
+        [profileId, bio, userId, avatarJson, now],
       );
 
       await client.query(
@@ -105,12 +110,17 @@ export async function seedAuth(pool: Pool): Promise<AuthData> {
 
     const userRows: UserRow[] = [];
 
-    const adminId     = await createUser('Admin Marvel',    'admin@marvel.com',     'Administrador da plataforma Marvel.', 0,   0);
-    const vendor1Id   = await createUser('Vendor One',      'vendor1@marvel.com',   'Vendedor especializado em moda.',     250, 250);
-    const vendor2Id   = await createUser('Vendor Two',      'vendor2@marvel.com',   'Vendedor especializado em eletrônicos.', 180, 180);
-    const staffId     = await createUser('Staff Member',    'staff@marvel.com',     'Membro da equipe de suporte.',        0,   0);
-    const customer1Id = await createUser('Alice Customer',  'customer1@marvel.com', 'Cliente frequente.',                  500, 400);
-    const customer2Id = await createUser('Bob Customer',    'customer2@marvel.com', 'Comprador ocasional.',                120, 120);
+    const adminAvatar = {
+      original:  'https://ui-avatars.com/api/?name=Admin+Marvel&background=0D8ABC&color=fff&size=200',
+      thumbnail: 'https://ui-avatars.com/api/?name=Admin+Marvel&background=0D8ABC&color=fff&size=80',
+    };
+
+    const adminId     = await createUser('Admin Marvel',    'admin@marvel.com',     'Administrador da plataforma Marvel.',   adminAvatar, 0,   0);
+    const vendor1Id   = await createUser('Vendor One',      'vendor1@marvel.com',   'Vendedor especializado em moda.',       null, 250, 250);
+    const vendor2Id   = await createUser('Vendor Two',      'vendor2@marvel.com',   'Vendedor especializado em eletrônicos.', null, 180, 180);
+    const staffId     = await createUser('Staff Member',    'staff@marvel.com',     'Membro da equipe de suporte.',          null, 0,   0);
+    const customer1Id = await createUser('Alice Customer',  'customer1@marvel.com', 'Cliente frequente.',                    null, 500, 400);
+    const customer2Id = await createUser('Bob Customer',    'customer2@marvel.com', 'Comprador ocasional.',                  null, 120, 120);
 
     userRows.push(
       { id: adminId,     permName: 'super_admin' },
