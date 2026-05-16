@@ -1,12 +1,12 @@
-import { AUTH_CRED, PERMISSIONS, TOKEN } from '@/utils/constants';
+import { API_ENDPOINTS, AUTH_CRED, PERMISSIONS, TOKEN } from '@/utils/constants';
 
-import { makeAutoObservable } from 'mobx';
+import { action, computed, makeObservable, observable, runInAction } from 'mobx';
 
 import { MobxMutation } from './MobxMutation';
+import { MobxQuery } from './MobxQuery';
 
-import type { LoginRequest, LoginResponse, RegisterRequest, RegisterResponse, UserPermission } from '@/types';
+import type { LoginRequest, LoginResponse, RegisterRequest, RegisterResponse, User, UserPermission } from '@/types';
 import type { RootService } from '@/services/root.service';
-
 interface AuthCredential {
   [TOKEN]: string;
   [PERMISSIONS]: string[];
@@ -19,11 +19,28 @@ export class AuthStore {
   role: string | null = null;
   emailVerified = false;
 
-  #loginMutation: MobxMutation<LoginResponse, Error, LoginRequest>;
-  #registerMutation: MobxMutation<RegisterResponse, Error, RegisterRequest>;
+  readonly #loginMutation: MobxMutation<LoginResponse, Error, LoginRequest>;
+  readonly #registerMutation: MobxMutation<RegisterResponse, Error, RegisterRequest>;
+  readonly #me = new MobxQuery<User, Error>({
+    enabled: false,
+    queryKey: [API_ENDPOINTS.ME],
+    queryFn: () => this.service.auth.me(),
+  });
 
   constructor(private readonly service: RootService) {
-    makeAutoObservable(this, { login: false, register: false });
+    makeObservable(this, {
+      role: observable,
+      token: observable,
+      permissions: observable,
+      hasPermission: computed,
+      emailVerified: observable,
+      isAuthenticated: computed,
+      login: computed,
+      register: computed,
+      me: computed,
+      meQuery: computed,
+      logout: action,
+    });
     this.rehydrate();
 
     this.#loginMutation = new MobxMutation<LoginResponse, Error, LoginRequest>({
@@ -35,6 +52,18 @@ export class AuthStore {
       mutationFn: (data) => this.service.auth.register(data),
       onSuccess: (data) => this.setSession(data),
     });
+  }
+
+  get meQuery() {
+    return this.#me.query({
+      queryKey: [API_ENDPOINTS.ME],
+      enabled: this.isAuthenticated,
+      queryFn: () => this.service.auth.me(),
+    });
+  }
+
+  get me() {
+    return this.meQuery.data || ({} as User);
   }
 
   get login() {
@@ -50,22 +79,25 @@ export class AuthStore {
   }
 
   private setSession(data: LoginResponse | RegisterResponse) {
-    const token = data.token ?? null;
-    const permissions = data.permissions ?? [];
-    const role = 'role' in data ? (data.role ?? null) : null;
-    const emailVerified = 'email_verified' in data ? data.email_verified : true;
+    runInAction(() => {
+      this.#me.refetch();
+      const token = data.token ?? null;
+      const permissions = data.permissions ?? [];
+      const role = 'role' in data ? (data.role ?? null) : null;
+      const emailVerified = 'email_verified' in data ? data.email_verified : true;
 
-    this.token = token;
-    this.permissions = permissions;
-    this.role = role;
-    this.emailVerified = emailVerified;
+      this.token = token;
+      this.permissions = permissions;
+      this.role = role;
+      this.emailVerified = emailVerified;
 
-    if (token) {
-      const cred: AuthCredential = { [TOKEN]: token, [PERMISSIONS]: permissions, role: role ?? '' };
-      localStorage.setItem(AUTH_CRED, JSON.stringify(cred));
-    } else {
-      localStorage.removeItem(AUTH_CRED);
-    }
+      if (token) {
+        const cred: AuthCredential = { [TOKEN]: token, [PERMISSIONS]: permissions, role: role ?? '' };
+        localStorage.setItem(AUTH_CRED, JSON.stringify(cred));
+      } else {
+        localStorage.removeItem(AUTH_CRED);
+      }
+    });
   }
 
   logout() {
@@ -95,6 +127,7 @@ export class AuthStore {
   }
 
   dispose() {
+    this.#me.dispose();
     this.#loginMutation.dispose();
     this.#registerMutation.dispose();
   }
