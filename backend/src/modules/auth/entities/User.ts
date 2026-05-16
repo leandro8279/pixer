@@ -1,6 +1,21 @@
-import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { Order } from '@/modules/orders/entities/Order';
+import { Shop } from '@/modules/shops/entities/Shop';
+import { Address } from '@/modules/users/entities/Address';
+
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  OneToMany,
+  OneToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 import { ModelHasRole } from './ModelHasRole';
+import { UserProfile } from './UserProfile';
+import { Wallet } from './Wallet';
 
 @Entity('users')
 export class User {
@@ -36,4 +51,23 @@ export class User {
 
   @OneToMany(() => ModelHasRole, (modelHasRole) => modelHasRole.user)
   modelHasRoles: ModelHasRole[];
+
+  @OneToOne(() => UserProfile, (profile) => profile.user)
+  profile: UserProfile | null;
+
+  @OneToOne(() => Wallet, (wallet) => wallet.customer)
+  wallet: Wallet | null;
+
+  @OneToMany(() => Address, (address) => address.customer)
+  addresses: Address[];
+
+  @OneToMany(() => Shop, (shop) => shop.owner)
+  ownedShops: Shop[];
+
+  @OneToOne(() => Shop, (shop) => shop.manager, { nullable: true })
+  @JoinColumn({ name: 'managed_shop_id' })
+  managedShop: Shop | null;
+
+  @OneToMany(() => Order, (order) => order.customer)
+  orders: Order[];
 }

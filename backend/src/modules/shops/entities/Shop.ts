@@ -62,10 +62,6 @@ export class Shop {
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
 
-  @ManyToOne(() => User, { onDelete: 'CASCADE' })
-  @JoinColumn({ name: 'owner_id' })
-  owner: User;
-
   @ManyToMany(() => Category)
   @JoinTable({
     name: 'category_shop',
@@ -79,4 +75,12 @@ export class Shop {
 
   @OneToOne(() => Balance, (balance) => balance.shop)
   balance: Balance | null;
+
+  @ManyToOne(() => User, (user) => user.ownedShops, { onDelete: 'CASCADE' })
+  @JoinColumn({ name: 'owner_id' })
+  owner: User;
+
+  @OneToOne(() => User, (user) => user.managedShop, { nullable: true })
+  @JoinColumn({ name: 'manager_id' })
+  manager: User | null;
 }

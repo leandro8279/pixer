@@ -117,4 +117,21 @@ export class AuthRepository implements IAuthRepository {
       );
     }
   }
+
+  public async findUserWithRelationsById(id: string): Promise<User | null> {
+    return this.userRepository
+      .createQueryBuilder('user')
+      .leftJoinAndSelect('user.profile', 'profile')
+      .leftJoinAndSelect('user.wallet', 'wallet')
+      .leftJoinAndSelect('user.address', 'address')
+      .leftJoinAndSelect('user.ownedShops', 'ownedShops')
+      .leftJoinAndSelect('ownedShops.balance', 'ownedShopsBalance')
+      .leftJoinAndSelect('user.managedShop', 'managedShop')
+      .leftJoinAndSelect('managedShop.balance', 'managedShopBalance')
+      .leftJoinAndSelect('user.orders', 'orders')
+      .where('user.id = :id', { id })
+      .orderBy('orders.created_at', 'DESC')
+      .take(1)
+      .getOne();
+  }
 }

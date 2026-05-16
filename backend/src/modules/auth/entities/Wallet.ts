@@ -1,6 +1,14 @@
 import {
-    Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  OneToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
+
+import { User } from './User';
 
 @Entity('wallets')
 export class Wallet {
@@ -25,7 +33,7 @@ export class Wallet {
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
 
-  // @OneToOne(() => User, (user) => user.wallet, { onDelete: 'CASCADE' })
-  // @JoinColumn({ name: 'customer_id' })
-  // customer: User | null;
+  @OneToOne(() => User, (user) => user.wallet, { onDelete: 'CASCADE' })
+  @JoinColumn({ name: 'customer_id' })
+  customer: User | null;
 }
