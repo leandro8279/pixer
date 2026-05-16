@@ -3,6 +3,8 @@ export interface LoginInput {
   password: string;
 }
 
+export interface User {}
+
 export interface LoginRequest {
   email: string;
   password: string;
@@ -95,4 +97,28 @@ export interface Settings {
   language: string;
   created_at: string;
   updated_at: string;
+}
+
+export interface Balance {
+  id: string;
+  total_earnings: number;
+  current_balance: number;
+  withdrawn_amount: number;
+  admin_commission_rate: number;
+  payment_info?: Record<string, unknown>;
+}
+
+export interface Shop {
+  id: string;
+  name: string;
+  slug: string;
+  description?: string | null;
+  is_active: boolean;
+  logo?: Record<string, any> | null;
+  cover_image?: Record<string, any> | null;
+  settings?: Record<string, any> | null;
+  address?: Record<string, any> | null;
+  balance?: Balance | null;
+  created_at: Date;
+  updated_at: Date;
 }
