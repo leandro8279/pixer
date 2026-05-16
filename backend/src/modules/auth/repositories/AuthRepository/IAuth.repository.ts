@@ -17,5 +17,5 @@ export interface IAuthRepository {
   getUserPermissions(id: string): Promise<string[]>;
   findUserByEmail(email: string): Promise<User | null>;
   findActiveUserByEmail(email: string): Promise<User | null>;
-  findUserWithRelationsById(id: string): Promise<User | null>;
+  isTokenRevoked(tokenHash: string): Promise<boolean>;
 }

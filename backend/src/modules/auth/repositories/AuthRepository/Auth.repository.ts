@@ -2,6 +2,7 @@ import { ModelHasPermission } from '@/modules/auth/entities/ModelHasPermission';
 import { ModelHasRole } from '@/modules/auth/entities/ModelHasRole';
 import { Permission } from '@/modules/auth/entities/Permission';
 import { Role } from '@/modules/auth/entities/Role';
+import { RevokedToken } from '@/modules/auth/entities/RevokedToken';
 import { User } from '@/modules/auth/entities/User';
 import { Wallet } from '@/modules/auth/entities/Wallet';
 import { Injectable } from '@nestjs/common';
@@ -31,6 +32,9 @@ export class AuthRepository implements IAuthRepository {
 
     @InjectRepository(ModelHasRole)
     private readonly modelHasRoleRepository: Repository<ModelHasRole>,
+
+    @InjectRepository(RevokedToken)
+    private readonly revokedTokenRepository: Repository<RevokedToken>,
   ) {}
 
   async findUserByEmail(email: string): Promise<User | null> {
@@ -118,20 +122,8 @@ export class AuthRepository implements IAuthRepository {
     }
   }
 
-  public async findUserWithRelationsById(id: string): Promise<User | null> {
-    return this.userRepository
-      .createQueryBuilder('user')
-      .leftJoinAndSelect('user.profile', 'profile')
-      .leftJoinAndSelect('user.wallet', 'wallet')
-      .leftJoinAndSelect('user.address', 'address')
-      .leftJoinAndSelect('user.ownedShops', 'ownedShops')
-      .leftJoinAndSelect('ownedShops.balance', 'ownedShopsBalance')
-      .leftJoinAndSelect('user.managedShop', 'managedShop')
-      .leftJoinAndSelect('managedShop.balance', 'managedShopBalance')
-      .leftJoinAndSelect('user.orders', 'orders')
-      .where('user.id = :id', { id })
-      .orderBy('orders.created_at', 'DESC')
-      .take(1)
-      .getOne();
+  async isTokenRevoked(tokenHash: string): Promise<boolean> {
+    const record = await this.revokedTokenRepository.findOne({ where: { tokenHash } });
+    return record !== null;
   }
 }

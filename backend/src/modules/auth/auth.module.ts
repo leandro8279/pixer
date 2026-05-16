@@ -12,16 +12,17 @@ import {
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
+import { RevokedToken } from '@/modules/auth/entities/RevokedToken';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
   imports: [
-    // PassportModule,
+    PassportModule,
     JwtModule.register({
       secret: process.env['JWT_SECRET'] ?? 'changeme',
       signOptions: { expiresIn: '7d' },
     }),
-    TypeOrmModule.forFeature([User, Role, Permission, ModelHasPermission, ModelHasRole, Wallet]),
+    TypeOrmModule.forFeature([User, Role, Permission, ModelHasPermission, ModelHasRole, Wallet, RevokedToken]),
   ],
   controllers: [AuthController],
   providers: [
