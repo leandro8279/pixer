@@ -1,4 +1,5 @@
 import { AuthController } from '@/modules/auth/controllers/Auth.controller';
+import { UsersController } from '@/modules/auth/controllers/Users.controller';
 import { ModelHasPermission } from '@/modules/auth/entities/ModelHasPermission';
 import { ModelHasRole } from '@/modules/auth/entities/ModelHasRole';
 import { Permission } from '@/modules/auth/entities/Permission';
@@ -9,6 +10,7 @@ import { AUTH_REPOSITORY, AuthRepository } from '@/modules/auth/repositories';
 import {
     LOGIN_SERVICE, LoginService,
     LOGOUT_SERVICE, LogoutService,
+    ME_SERVICE, MeService,
     REGISTER_SERVICE, RegisterService,
 } from '@/modules/auth/services';
 import { JwtStrategy } from '@/modules/auth/strategies/Jwt.strategy';
@@ -27,12 +29,13 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     }),
     TypeOrmModule.forFeature([User, Role, Permission, ModelHasPermission, ModelHasRole, Wallet, RevokedToken]),
   ],
-  controllers: [AuthController],
+  controllers: [AuthController, UsersController],
   providers: [
     { provide: AUTH_REPOSITORY, useClass: AuthRepository },
     { provide: REGISTER_SERVICE, useClass: RegisterService },
     { provide: LOGIN_SERVICE, useClass: LoginService },
     { provide: LOGOUT_SERVICE, useClass: LogoutService },
+    { provide: ME_SERVICE, useClass: MeService },
     JwtStrategy,
   ],
 })

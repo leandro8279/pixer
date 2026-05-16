@@ -2,6 +2,8 @@ import { UserResponseDTO } from '@/modules/auth/dto';
 import { IMeService, ME_SERVICE } from '@/modules/auth/services';
 import { Controller, Get, HttpCode, HttpStatus, Inject, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { CurrentUser, AuthenticatedUser } from "@/common/decorators/CurrentUser"
+import { JwtAuthGuard } from "@/modules/auth/guards/JwtAuth.guard";
 
 @Controller()
 export class UsersController {

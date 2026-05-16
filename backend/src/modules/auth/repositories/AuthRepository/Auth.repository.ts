@@ -122,17 +122,18 @@ export class AuthRepository implements IAuthRepository {
     }
   }
 
-  async findUserWithRelationsById(id: string): Promise<UserWithRelations | null> {
-    const user = await this.userRepository.findOne({
+  async findUserWithRelationsById(id: string): Promise<User | null> {
+    return this.userRepository.findOne({
       where: { id },
-      relations: { modelHasRoles: { role: true } },
+      relations: {
+        profile: true,
+        wallet: true,
+        addresses: true,
+        ownedShops: { balance: true },
+        managedShop: { balance: true },
+        orders: true,
+      },
     });
-    if (!user) return null;
-
-    const wallet = await this.walletRepository.findOne({ where: { customerId: id } });
-    const roles = user.modelHasRoles.map((mhr) => mhr.role);
-
-    return Object.assign(user, { wallet: wallet ?? null, roles });
   }
 
   async revokeToken(tokenHash: string, expiresAt: Date): Promise<void> {
