@@ -1,6 +1,7 @@
-import { AuthService, authService } from './auth.service';
+import { AuthService } from './auth.service';
 import { BaseService } from './base.service';
 import { SettingService } from './setting.service';
+import { ShopService } from './shop.service';
 
 export class RootService extends BaseService {
   private static _instance: RootService | null = null;
@@ -16,8 +17,9 @@ export class RootService extends BaseService {
     return RootService._instance;
   }
 
-  readonly auth: AuthService = authService;
+  readonly auth = new AuthService();
   readonly settings = new SettingService();
+  readonly shop = new ShopService();
 }
 
 export const rootService = RootService.getInstance();
