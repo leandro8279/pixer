@@ -1,0 +1,21 @@
+import { {{singular module}}ResponseDTO } from '@/modules/{{module}}/dto';
+import { GET_{{toConstantCase module}}_SERVICE, IGet{{singular module}}Service } from '@/modules/{{module}}/services';
+import { Controller, Get, Inject, Param } from '@nestjs/common';
+import { ApiOperation, ApiParam, ApiResponse } from '@nestjs/swagger';
+
+@Controller('{{module}}')
+export class {{pascalCase module}}Controller {
+  constructor(
+    @Inject(GET_{{toConstantCase module}}_SERVICE)
+    private readonly get{{singular module}}Service: IGet{{singular module}}Service,
+  ) {}
+
+  @Get(':id')
+  @ApiOperation({ summary: 'Buscar {{singular module}} por ID' })
+  @ApiParam({ name: 'id', type: String, description: 'ID do recurso' })
+  @ApiResponse({ status: 200, type: {{singular module}}ResponseDTO })
+  @ApiResponse({ status: 404, description: '{{singular module}} não encontrado' })
+  show(@Param('id') id: string): Promise<IGet{{singular module}}Service.Result> {
+    return this.get{{singular module}}Service.execute({ id });
+  }
+}

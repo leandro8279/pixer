@@ -1,0 +1,28 @@
+import { {{toConstantCase module}}_REPOSITORY, I{{pascalCase module}}Repository } from '@/modules/{{module}}/repositories/{{pascalCase module}}Repository';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+
+import { IGet{{singular module}}Service } from './IGet{{singular module}}.service';
+
+@Injectable()
+export class Get{{singular module}}Service implements IGet{{singular module}}Service {
+  constructor(
+    @Inject({{toConstantCase module}}_REPOSITORY)
+    private readonly {{camelCase module}}Repository: I{{pascalCase module}}Repository,
+  ) {}
+
+  public async execute(params: IGet{{singular module}}Service.Params): Promise<IGet{{singular module}}Service.Result> {
+    const item = await this.{{camelCase module}}Repository.findById(params.id);
+
+    if (!item) throw new NotFoundException('{{singular module}} não encontrado');
+
+    return this.toEntity(item);
+  }
+
+  private toEntity(item: {{singular module}}): IGet{{singular module}}Service.Result {
+    return {
+      id: item.id,
+      created_at: item.createdAt,
+      updated_at: item.updatedAt,
+    } as IGet{{singular module}}Service.Result;
+  }
+}

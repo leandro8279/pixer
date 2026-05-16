@@ -1,0 +1,11 @@
+import { {{singular module}} } from '@/modules/{{module}}/entities/{{singular module}}';
+
+export const {{toConstantCase module}}_REPOSITORY = Symbol('I{{pascalCase module}}Repository');
+
+export interface I{{pascalCase module}}Repository {
+  findById(id: string): Promise<{{singular module}} | null>;
+  findAll(): Promise<{{singular module}}[]>;
+  create(data: Partial<{{singular module}}>): Promise<{{singular module}}>;
+  update(id: string, data: Partial<{{singular module}}>): Promise<{{singular module}}>;
+  delete(id: string): Promise<void>;
+}

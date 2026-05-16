@@ -1,0 +1,12 @@
+import { {{singular module}}ResponseDTO } from '@/modules/{{module}}/dto';
+
+export const GET_{{toConstantCase module}}_SERVICE = Symbol('IGet{{singular module}}Service');
+
+export interface IGet{{singular module}}Service {
+  execute(params: IGet{{singular module}}Service.Params): Promise<IGet{{singular module}}Service.Result>;
+}
+
+export namespace IGet{{singular module}}Service {
+  export type Params = { id: string };
+  export type Result = {{singular module}}ResponseDTO;
+}

@@ -28,6 +28,203 @@ module.exports = function (plop) {
     return result.charAt(0).toUpperCase() + result.slice(1);
   });
 
+  // ── helpers locais para os transforms ────────────────────────────────────
+  function singular(str) {
+    let result = str;
+    if (str.endsWith('ies')) result = str.slice(0, -3) + 'y';
+    else if (str.endsWith('s')) result = str.slice(0, -1);
+    return result.charAt(0).toUpperCase() + result.slice(1);
+  }
+
+  function pascalCase(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+
+  function toConstantCase(str) {
+    let result = str;
+    if (str.endsWith('ies')) result = str.slice(0, -3) + 'y';
+    else if (str.endsWith('s')) result = str.slice(0, -1);
+    return result.replace(/([a-z0-9])([A-Z])/g, '$1_$2').toUpperCase();
+  }
+
+  plop.setGenerator('module', {
+    description: 'Gerar Módulo completo (entity, repository, service, dto, controller, module)',
+    prompts: [
+      {
+        type: 'input',
+        name: 'module',
+        message: 'Nome do módulo em plural (ex: products)',
+      },
+    ],
+    actions: [
+      // ── Entity ──────────────────────────────────────────────────────────
+      {
+        type: 'add',
+        force: true,
+        path: path.join(process.cwd(), 'src/modules/{{module}}/entities/{{singular module}}.ts'),
+        templateFile: 'templates/module.entity.hbs',
+      },
+
+      // ── Repository ──────────────────────────────────────────────────────
+      {
+        type: 'add',
+        force: true,
+        path: path.join(
+          process.cwd(),
+          'src/modules/{{module}}/repositories/{{pascalCase module}}Repository/I{{pascalCase module}}.repository.ts',
+        ),
+        templateFile: 'templates/module.repository.interface.hbs',
+      },
+      {
+        type: 'add',
+        force: true,
+        path: path.join(
+          process.cwd(),
+          'src/modules/{{module}}/repositories/{{pascalCase module}}Repository/{{pascalCase module}}.repository.ts',
+        ),
+        templateFile: 'templates/module.repository.hbs',
+      },
+      {
+        type: 'add',
+        force: true,
+        path: path.join(
+          process.cwd(),
+          'src/modules/{{module}}/repositories/{{pascalCase module}}Repository/index.ts',
+        ),
+        template: '',
+      },
+      {
+        type: 'modify',
+        path: path.join(
+          process.cwd(),
+          'src/modules/{{module}}/repositories/{{pascalCase module}}Repository/index.ts',
+        ),
+        transform: (_, answers) => {
+          const name = pascalCase(answers.module);
+          return `export * from './${name}.repository';\nexport * from './I${name}.repository';\n`;
+        },
+      },
+      {
+        type: 'add',
+        path: path.join(process.cwd(), 'src/modules/{{module}}/repositories/index.ts'),
+        template: '',
+        skipIfExists: true,
+      },
+      {
+        type: 'modify',
+        path: path.join(process.cwd(), 'src/modules/{{module}}/repositories/index.ts'),
+        transform: (content, answers) => {
+          const name = pascalCase(answers.module);
+          const line = `export * from './${name}Repository';`;
+          if (content.includes(line)) return content;
+          return content + `${line}\n`;
+        },
+      },
+
+      // ── Service ─────────────────────────────────────────────────────────
+      {
+        type: 'add',
+        force: true,
+        path: path.join(
+          process.cwd(),
+          'src/modules/{{module}}/services/Get{{singular module}}Service/IGet{{singular module}}.service.ts',
+        ),
+        templateFile: 'templates/module.service.interface.hbs',
+      },
+      {
+        type: 'add',
+        force: true,
+        path: path.join(
+          process.cwd(),
+          'src/modules/{{module}}/services/Get{{singular module}}Service/Get{{singular module}}.service.ts',
+        ),
+        templateFile: 'templates/module.service.hbs',
+      },
+      {
+        type: 'add',
+        force: true,
+        path: path.join(
+          process.cwd(),
+          'src/modules/{{module}}/services/Get{{singular module}}Service/index.ts',
+        ),
+        template: '',
+      },
+      {
+        type: 'modify',
+        path: path.join(
+          process.cwd(),
+          'src/modules/{{module}}/services/Get{{singular module}}Service/index.ts',
+        ),
+        transform: (_, answers) => {
+          const entity = singular(answers.module);
+          return `export * from './Get${entity}.service';\nexport * from './IGet${entity}.service';\n`;
+        },
+      },
+      {
+        type: 'add',
+        path: path.join(process.cwd(), 'src/modules/{{module}}/services/index.ts'),
+        template: '',
+        skipIfExists: true,
+      },
+      {
+        type: 'modify',
+        path: path.join(process.cwd(), 'src/modules/{{module}}/services/index.ts'),
+        transform: (content, answers) => {
+          const entity = singular(answers.module);
+          const line = `export * from './Get${entity}Service';`;
+          if (content.includes(line)) return content;
+          return content + `${line}\n`;
+        },
+      },
+
+      // ── DTO ─────────────────────────────────────────────────────────────
+      {
+        type: 'add',
+        force: true,
+        path: path.join(
+          process.cwd(),
+          'src/modules/{{module}}/dto/{{singular module}}Response.dto.ts',
+        ),
+        templateFile: 'templates/dto.response.hbs',
+      },
+      {
+        type: 'add',
+        path: path.join(process.cwd(), 'src/modules/{{module}}/dto/index.ts'),
+        template: '',
+        skipIfExists: true,
+      },
+      {
+        type: 'modify',
+        path: path.join(process.cwd(), 'src/modules/{{module}}/dto/index.ts'),
+        transform: (content, answers) => {
+          const entity = singular(answers.module);
+          const line = `export * from './${entity}Response.dto';`;
+          if (content.includes(line)) return content;
+          return content + `${line}\n`;
+        },
+      },
+
+      // ── Controller ──────────────────────────────────────────────────────
+      {
+        type: 'add',
+        force: true,
+        path: path.join(
+          process.cwd(),
+          'src/modules/{{module}}/controllers/{{pascalCase module}}.controller.ts',
+        ),
+        templateFile: 'templates/module.controller.hbs',
+      },
+
+      // ── Module ──────────────────────────────────────────────────────────
+      {
+        type: 'add',
+        force: true,
+        path: path.join(process.cwd(), 'src/modules/{{module}}/{{module}}.module.ts'),
+        templateFile: 'templates/module.hbs',
+      },
+    ],
+  });
+
   plop.setGenerator('service', {
     description: 'Gerar Serviço',
     prompts: [

@@ -1,0 +1,35 @@
+import { {{singular module}} } from '@/modules/{{module}}/entities/{{singular module}}';
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+
+import { I{{pascalCase module}}Repository } from './I{{pascalCase module}}.repository';
+
+@Injectable()
+export class {{pascalCase module}}Repository implements I{{pascalCase module}}Repository {
+  constructor(
+    @InjectRepository({{singular module}})
+    private repository: Repository<{{singular module}}>,
+  ) {}
+
+  public async findById(id: string): Promise<{{singular module}} | null> {
+    return this.repository.findOneBy({ id });
+  }
+
+  public async findAll(): Promise<{{singular module}}[]> {
+    return this.repository.find();
+  }
+
+  public async create(data: Partial<{{singular module}}>): Promise<{{singular module}}> {
+    return this.repository.save(this.repository.create(data));
+  }
+
+  public async update(id: string, data: Partial<{{singular module}}>): Promise<{{singular module}}> {
+    await this.repository.update(id, data);
+    return this.repository.findOneBy({ id }) as Promise<{{singular module}}>;
+  }
+
+  public async delete(id: string): Promise<void> {
+    await this.repository.delete(id);
+  }
+}

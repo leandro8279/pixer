@@ -1,0 +1,16 @@
+import { {{pascalCase module}}Controller } from '@/modules/{{module}}/controllers/{{pascalCase module}}.controller';
+import { {{singular module}} } from '@/modules/{{module}}/entities/{{singular module}}';
+import { {{toConstantCase module}}_REPOSITORY, {{pascalCase module}}Repository } from '@/modules/{{module}}/repositories';
+import { GET_{{toConstantCase module}}_SERVICE, Get{{singular module}}Service } from '@/modules/{{module}}/services';
+import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
+
+@Module({
+  imports: [TypeOrmModule.forFeature([{{singular module}}])],
+  controllers: [{{pascalCase module}}Controller],
+  providers: [
+    { provide: {{toConstantCase module}}_REPOSITORY, useClass: {{pascalCase module}}Repository },
+    { provide: GET_{{toConstantCase module}}_SERVICE, useClass: Get{{singular module}}Service },
+  ],
+})
+export class {{pascalCase module}}Module {}
