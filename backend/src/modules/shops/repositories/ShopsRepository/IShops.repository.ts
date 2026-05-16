@@ -8,10 +8,10 @@ export type UpdateShopData = Partial<Omit<Shop, 'id' | 'createdAt' | 'updatedAt'
 export interface ListShopsFilters {
   page: number;
   limit: number;
-  language: string;
-  search: string;
-  searchJoin: string;
-  isActive: boolean;
+  language?: string;
+  search?: string;
+  searchJoin?: string;
+  isActive?: boolean;
 }
 
 export type PaginatedResult<T> = {

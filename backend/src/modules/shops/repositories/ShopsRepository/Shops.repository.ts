@@ -2,7 +2,6 @@ import { parseSearchString, SearchConfig } from '@/common/utils/search-parser';
 import { Shop } from '@/modules/shops/entities/Shop';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-
 import { Repository } from 'typeorm';
 
 import {
@@ -14,9 +13,9 @@ import {
 } from './IShops.repository';
 
 const SHOPS_SEARCH_CONFIG: SearchConfig = {
-  name: { op: 'like' },
-  is_active: { op: 'boolean' },
-  'categories.slug': { op: 'relation_many_through', pivot: 'category', field: 'slug' },
+  name:              { op: 'like' },
+  is_active:         { op: 'boolean' },
+  'categories.slug': { op: 'relation_many', field: 'slug', nested_op: 'exact' },
 };
 
 @Injectable()
@@ -31,8 +30,43 @@ export class ShopsRepository implements IShopsRepository {
 
   public async update(id: string, params: UpdateShopData): Promise<Shop> {
     await this.repository.update(id, params);
-
     return this.repository.findOneBy({ id }) as Promise<Shop>;
+  }
+
+  public async listShops(params: ListShopsFilters): Promise<PaginatedResult<Shop>> {
+    const { page, limit, search, searchJoin, isActive } = params;
+    const skip = (page - 1) * limit;
+
+    const baseWhere: Record<string, unknown> = {};
+    if (isActive !== undefined) baseWhere.isActive = isActive;
+
+    const searchWhere = parseSearchString(search, searchJoin, SHOPS_SEARCH_CONFIG);
+
+    let where: Record<string, unknown> | Record<string, unknown>[];
+
+    if (!searchWhere) {
+      where = baseWhere;
+    } else if (Array.isArray(searchWhere)) {
+      where = searchWhere.map((clause) => ({ ...baseWhere, ...clause }));
+    } else {
+      where = { ...baseWhere, ...searchWhere };
+    }
+
+    const [data, total] = await this.repository.findAndCount({
+      where: where as any,
+      relations: { categories: true },
+      order: { createdAt: 'DESC' },
+      skip,
+      take: limit,
+    });
+
+    return {
+      data,
+      total,
+      perPage: limit,
+      currentPage: page,
+      lastPage: Math.ceil(total / limit) || 1,
+    };
   }
 
   public async findShopByIdOrSlug(idOrSlug: string, language: string, includeBalance: boolean): Promise<Shop | null> {
@@ -61,29 +95,5 @@ export class ShopsRepository implements IShopsRepository {
     }
 
     return qb.getOne();
-  }
-
-  public async listShops(params: ListShopsFilters): Promise<PaginatedResult<Shop>> {
-    const { page, limit, language = this.DEFAULT_LANGUAGE, search, searchJoin, isActive } = params;
-    const skip = (page - 1) * limit;
-
-    const where: Record<string, unknown> = {};
-
-    if (isActive !== undefined) where.isActive = isActive;
-    const searchWhere = parseSearchString(search, searchJoin, SHOPS_SEARCH_CONFIG);
-    if (searchWhere) Object.assign(where, searchWhere);
-
-    const [shops, total] = await Promise.all([
-      this.repository.createQueryBuilder('shops').getMany(),
-      this.repository.createQueryBuilder('shops').getCount(),
-    ]);
-
-    return {
-      total,
-      data: shops,
-      perPage: limit,
-      currentPage: page,
-      lastPage: Math.ceil(total / limit),
-    };
   }
 }

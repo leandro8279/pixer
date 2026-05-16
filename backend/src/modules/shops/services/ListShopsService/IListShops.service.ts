@@ -1,6 +1,4 @@
-import { Shop } from '@/modules/shops/entities/Shop';
-
-import { PaginatedResult } from '../../repositories';
+import { ListShopsResponseDTO } from '@/modules/shops/dto';
 
 export const LIST_SHOP_SERVICE = Symbol('IListShopsService');
 
@@ -17,5 +15,5 @@ export namespace IListShopsService {
     searchJoin?: string;
     isActive?: boolean;
   };
-  export type Result = PaginatedResult<Shop>;
+  export type Result = ListShopsResponseDTO;
 }
