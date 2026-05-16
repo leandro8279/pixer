@@ -1,0 +1,22 @@
+import { {{singular module}} } from '@/modules/{{module}}/entities/{{singular module}}';
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+
+import { Repository } from 'typeorm';
+
+import { Create{{singular module}}Data, I{{name}}Repository, Update{{singular module}}Data } from './I{{name}}.repository';
+
+@Injectable()
+export class {{name}}Repository implements I{{name}}Repository {
+  constructor(@InjectRepository({{singular module}}) private repository: Repository<{{singular module}}>) {}
+
+  public async create(params: Create{{singular module}}Data): Promise<{{singular module}}> {
+    return this.repository.save(this.repository.create(params));
+  }
+
+  public async update(id: string, params: Update{{singular module}}Data): Promise<{{singular module}}> {
+    await this.repository.update(id, params);
+
+    return this.repository.findOneBy({ id }) as Promise<{{singular module}}>;
+  }
+}

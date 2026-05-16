@@ -1,0 +1,16 @@
+import { {{toConstantCase module}}_REPOSITORY, I{{pascalCase module}}Repository } from '@/modules/{{module}}/repositories/{{pascalCase module}}Repository';
+import { Inject, Injectable } from '@nestjs/common';
+
+import { I{{pascalCase name}}Service } from './I{{pascalCase name}}.service';
+
+@Injectable()
+export class {{pascalCase name}}Service implements I{{pascalCase name}}Service {
+  constructor(
+    @Inject({{toConstantCase module}}_REPOSITORY)
+    private readonly {{module}}Repository: I{{pascalCase module}}Repository,
+  ) {}
+
+  public async execute(params: I{{pascalCase name}}Service.Params): Promise<I{{pascalCase name}}Service.Result> {
+    throw new Error('Method not implemented.');
+  }
+}

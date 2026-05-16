@@ -1,0 +1,13 @@
+import { DTO } from '@/modules/{{module}}/dto';
+import { {{singular module}} } from '@/modules/{{module}}/entities/{{singular module}}';
+
+export const {{toConstantCase name}}_SERVICE = Symbol('I{{pascalCase name}}Service');
+
+export interface I{{pascalCase name}}Service {
+  execute(params: I{{pascalCase name}}Service.Params): Promise<I{{pascalCase name}}Service.Result>;
+}
+
+export namespace I{{pascalCase name}}Service {
+  export type Params = DTO;
+  export type Result = DTO;
+}

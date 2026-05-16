@@ -1,0 +1,11 @@
+import { {{singular module}} } from '@/modules/{{module}}/entities/{{singular module}}';
+
+export const {{toConstantCase name}}_REPOSITORY = Symbol('I{{pascalCase name}}Repository');
+
+export type Create{{singular module}}Data = Omit<{{singular module}}, 'id' | 'createdAt' | 'updatedAt'>;
+export type Update{{singular module}}Data = Partial<Omit<{{singular module}}, 'id' | 'createdAt' | 'updatedAt'>>;
+
+export interface I{{pascalCase name}}Repository {
+  create(params: Create{{singular module}}Data): Promise<{{singular module}}>;
+  update(id: string, params: Update{{singular module}}Data): Promise<{{singular module}}>;
+}
