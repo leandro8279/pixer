@@ -50,7 +50,7 @@ export class MeService implements IMeService {
             available_points: user.wallet.availablePoints,
           }
         : null,
-      address: user.addresses.map((a) => ({
+      addresses: user.addresses.map((a) => ({
         id: a.id,
         title: a.title,
         type: a.type,
