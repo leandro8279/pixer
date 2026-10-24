@@ -15,14 +15,30 @@ export function hasAccess(_allowedRoles: string[], _userPermissions: string[] | 
 }
 
 export function setAuthCredentials(token: string, permissions: any, role: any) {
-  Cookie.set(AUTH_CRED, JSON.stringify({ token, permissions, role }));
+  const credentials = JSON.stringify({ token, permissions, role });
+  const tokenKey = import.meta.env.NEXT_PUBLIC_AUTH_TOKEN_KEY ?? AUTH_CRED;
+
+  Cookie.set(AUTH_CRED, credentials);
+  if (tokenKey !== AUTH_CRED) {
+    Cookie.set(tokenKey, credentials);
+  }
 }
 
 export function getAuthCredentials(): { token: string | null; permissions: string[] | null; role: string | null } {
   const authCred = Cookie.get(AUTH_CRED);
 
   if (authCred) {
-    return JSON.parse(authCred);
+    try {
+      const credentials = JSON.parse(authCred);
+
+      return {
+        token: typeof credentials.token === 'string' ? credentials.token : null,
+        permissions: Array.isArray(credentials.permissions) ? credentials.permissions : null,
+        role: typeof credentials.role === 'string' ? credentials.role : null,
+      };
+    } catch {
+      Cookie.remove(AUTH_CRED);
+    }
   }
 
   return { token: null, permissions: null, role: null };
