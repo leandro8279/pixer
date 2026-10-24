@@ -12,6 +12,7 @@ import { ProductStore } from './product';
 import { SettingStore } from './setting';
 import { ShopStore } from './shop';
 import { TagStore } from './tag';
+import { TaxeStore } from './taxe';
 import { TypeStore } from './type';
 import { UploadStore } from './upload';
 import { WithdrawStore } from './withdraw';
@@ -32,6 +33,7 @@ export class RootStore {
   readonly product: ProductStore;
   readonly withdraw: WithdrawStore;
   readonly tag: TagStore;
+  readonly taxe: TaxeStore;
 
   constructor(private readonly service: RootService) {
     this.app = new AppStore();
@@ -49,5 +51,6 @@ export class RootStore {
     this.manufacturer = new ManufacturerStore(this, this.service);
     this.withdraw = new WithdrawStore(this, this.service);
     this.tag = new TagStore(this, this.service);
+    this.taxe = new TaxeStore(this, this.service);
   }
 }
