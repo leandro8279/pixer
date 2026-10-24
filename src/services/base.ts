@@ -48,9 +48,11 @@ export class BaseService {
         if (axios.isAxiosError(error)) {
           const status = error.response?.status;
 
-          if (status === 401) {
+          if (status === 401 && Cookies.get(AUTH_TOKEN_KEY)) {
+            Cookies.remove(AUTH_TOKEN_KEY);
+            Cookies.remove(AUTH_CRED);
             localStorage.removeItem(AUTH_CRED);
-            window.location.href = '/login';
+            window.location.replace('/login');
           }
         }
 
