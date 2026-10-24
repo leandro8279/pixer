@@ -28,6 +28,8 @@ import { TagsPage } from '@/pages/tags/list';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
+import { TaxesPage } from './pages/taxes';
+
 export const AppSettings = observer((props: { children: React.ReactNode }) => {
   const [initialized, setInitialized] = React.useState(true);
   const { settings, settingsQuery } = useRootStore('setting');
@@ -108,6 +110,10 @@ function App() {
               <Route
                 component={TagsPage}
                 path={Routes.tag.list}
+              />
+              <Route
+                component={TaxesPage}
+                path={Routes.tax.list}
               />
               {/* <Route path="/users/:name">{(params) => <>Hello, {params.name}!</>}</Route> */}
 
