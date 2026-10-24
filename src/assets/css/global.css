@@ -1,0 +1,377 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+@import 'tailwindcss';
+
+@import './custom-plugins.css';
+
+/* @import './rich-text-editor.css'; */
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-heading: var(--font-body);
+  --font-body: 'Inter', sans-serif;
+  --color-light: var(--color-light);
+  --color-dark: var(--color-dark);
+  --color-accent: var(--color-accent);
+  --color-muted-black: var(--color-muted-black);
+  --color-base-dark: var(--text-base-dark);
+  --color-accent-hover: var(--color-accent-hover);
+  --color-accent-300: var(--color-accent-300);
+  --color-accent-400: var(--color-accent-400);
+  --color-accent-500: var(--color-accent-500);
+  --color-accent-600: var(--color-accent-600);
+  --color-accent-700: var(--color-accent-700);
+  --color-border-50: var(--color-border-50);
+  --color-border-100: var(--color-border-100);
+  --color-border-200: var(--color-border-200);
+  --color-border-base: var(--color-border-base);
+  --color-border-400: var(--color-border-400);
+  --color-gray-50: var(--color-gray-50);
+  --color-gray-100: var(--color-gray-100);
+  --color-gray-200: var(--color-gray-200);
+  --color-gray-300: var(--color-gray-300);
+  --color-gray-400: var(--color-gray-400);
+  --color-gray-500: var(--color-gray-500);
+  --color-gray-600: var(--color-gray-600);
+  --color-gray-700: var(--color-gray-700);
+  --color-gray-800: var(--color-gray-800);
+  --color-gray-900: var(--color-gray-900);
+  --color-orange-50: var(--color-orange-50);
+  --color-orange-100: var(--color-orange-100);
+  --color-orange-200: var(--color-orange-200);
+  --color-orange-300: var(--color-orange-300);
+  --color-orange-400: var(--color-orange-400);
+  --color-orange-500: var(--color-orange-500);
+  --color-orange-600: var(--color-orange-600);
+  --color-orange-700: var(--color-orange-700);
+  --color-orange-800: var(--color-orange-800);
+  --color-orange-900: var(--color-orange-900);
+  --color-body: var(--text-base);
+  --color-body-dark: var(--text-base-dark);
+  --color-muted: var(--text-muted);
+  --color-muted-light: var(--text-muted-light);
+  --color-heading: var(--text-heading);
+  --color-sub-heading: var(--text-sub-heading);
+  --color-bolder: var(--text-text-bolder);
+}
+
+:root {
+  /*
+    *
+    * This all are the rgb values which are used inside the
+    * tailwind config file and custom plugins css file
+    *
+    */
+
+  /*
+    * primary color
+    */
+  --color-accent: rgb(13, 153, 101);
+
+  /*
+    * Hover state color of primary color
+    */
+  --color-accent-hover: rgb(9, 130, 85);
+
+  /*
+    * shade of primary color
+    */
+  --color-accent-300: rgb(133, 214, 177);
+
+  /*
+    * shade of primary color
+    */
+  --color-accent-400: rgb(84, 173, 140);
+
+  /*
+    * shade of primary color
+    */
+  --color-accent-500: rgb(0, 159, 127);
+
+  /*
+    * shade of primary color
+    */
+  --color-accent-600: rgb(0, 143, 114);
+
+  /*
+    * shade of primary color
+    */
+  --color-accent-700: rgb(0, 119, 95);
+
+  /*
+    * light color
+    */
+  --color-light: rgb(255, 255, 255);
+
+  /*
+    * dark color
+    */
+  --color-dark: rgb(0, 0, 0);
+
+  /*
+    * Black muted color
+    */
+  --color-muted-black: rgb(17, 17, 17);
+
+  /*
+    *
+    * TEXT colors
+    *
+    */
+
+  /*
+    * text color used for body/base text -> gray-500
+    */
+  --text-base: rgb(102, 102, 102);
+
+  /*
+    * dark base text color  -> gray-600
+    */
+  --text-base-dark: rgb(51, 51, 51);
+
+  /*
+    * muted text color -> gray-400
+    */
+  --text-muted: rgb(156, 163, 175);
+
+  /*
+    * light muted text color - gray-300
+    */
+  --text-muted-light: rgb(209, 213, 219);
+
+  /*
+    * text color used for heading text -> gray-700
+    */
+  --text-sub-heading: rgb(55, 65, 81);
+
+  /*
+    * text color used for heading text -> gray-800
+    */
+  --text-heading: rgb(31, 41, 55);
+
+  /*
+    * text color used for heading text -> gray-900
+    */
+  --text-bolder: rgb(31, 41, 55);
+
+  /*
+    *
+    * border colors
+    *
+    */
+
+  /*
+    * border color 50
+    */
+  --color-border-50: rgb(249, 250, 251);
+
+  /*
+    * border color 100
+    */
+  --color-border-100: rgb(243, 244, 246);
+
+  /*
+    * border color 200
+    */
+  --color-border-200: rgb(229, 231, 235);
+
+  /*
+    * border base color which is 300
+    */
+  --color-border-base: rgb(209, 213, 219);
+
+  /*
+    * border color 400
+    */
+  --color-border-400: rgb(156, 163, 175);
+
+  /*
+    *
+    * Tailwind default gray color override
+    *
+    */
+
+  /*
+    * gray-50
+    */
+  --color-gray-50: rgb(249, 250, 251);
+
+  /*
+    * gray-100
+    */
+  --color-gray-100: rgb(243, 244, 246);
+
+  /*
+    * gray-200
+    */
+  --color-gray-200: rgb(229, 231, 235);
+
+  /*
+    * gray-300
+    */
+  --color-gray-300: rgb(209, 213, 219);
+
+  /*
+    * gray-400
+    */
+  --color-gray-400: rgb(156, 163, 175);
+
+  /*
+    * gray-500
+    */
+  --color-gray-500: rgb(107, 114, 128);
+
+  /*
+    * gray-600
+    */
+  --color-gray-600: rgb(75, 85, 99);
+
+  /*
+    * gray-700
+    */
+  --color-gray-700: rgb(55, 65, 81);
+
+  /*
+    * gray-800
+    */
+  --color-gray-800: rgb(31, 41, 55);
+
+  /*
+    * gray-900
+    */
+  --color-gray-900: rgb(31, 41, 55);
+
+  /*
+    * orange-50
+    */
+  --color-orange-50: rgb(255, 247, 237);
+
+  /*
+    * orange-100
+    */
+  --color-orange-100: rgb(255, 237, 213);
+
+  /*
+    * orange-200
+    */
+  --color-orange-200: rgb(254, 215, 170);
+
+  /*
+    * orange-300
+    */
+  --color-orange-300: rgb(253, 186, 116);
+
+  /*
+    * orange-400
+    */
+  --color-orange-400: rgb(251, 146, 60);
+
+  /*
+    * orange-500
+    */
+  --color-orange-500: rgb(249, 115, 22);
+
+  /*
+    * orange-600
+    */
+  --color-orange-600: rgb(234, 88, 12);
+
+  /*
+    * orange-700
+    */
+  --color-orange-700: rgb(194, 65, 12);
+
+  /*
+    * orange-800
+    */
+  --color-orange-800: rgb(154, 52, 18);
+
+  /*
+    * orange-900
+    */
+  --color-orange-900: rgb(124, 45, 18);
+
+  /*
+    Pending
+    */
+  --color-pending: rgb(201, 161, 22);
+
+  /*
+    Processing
+    */
+  --color-processing: rgb(158, 117, 0);
+
+  /*
+    Complete
+    */
+  --color-complete: rgb(0, 161, 127);
+
+  /*
+    Canceled
+    */
+  --color-canceled: rgb(227, 110, 1);
+
+  /*
+    Failed
+    */
+  --color-failed: rgb(238, 43, 0);
+
+  /*
+    Out for delivery
+    */
+  --color-out-for-delivery: rgb(126, 173, 66);
+
+  /*
+    40px base 16px
+    */
+  --h1: 2.5rem;
+
+  /*
+    32px base 16px
+    */
+  --h2: 2rem;
+
+  /*
+    24px base 16px
+    */
+  --h3: 1.5rem;
+
+  /*
+    20px base 16px
+    */
+  --h4: 1.25rem;
+
+  /*
+    18px base 16px
+    */
+  --h5: 1.125rem;
+
+  /*
+    16px base 16px
+    */
+  --h6: 1rem;
+}
+
+@layer base {
+  body {
+    @apply font-body;
+  }
+
+  a {
+    @apply no-underline;
+  }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Firefox */
+  input[type='number'] {
+    -moz-appearance: textfield;
+  }
+}
