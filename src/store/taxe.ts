@@ -2,7 +2,7 @@ import { action, computed, makeObservable, observable } from 'mobx';
 
 import { API_ENDPOINTS } from '@/config/endpoints';
 import { RootService } from '@/services/root';
-import { TaxQueryOptions } from '@/types';
+import { Tax, TaxQueryOptions } from '@/types';
 import { keepPreviousData } from '@tanstack/react-query';
 
 import { MobxQuery } from './query';
@@ -25,7 +25,7 @@ export class TaxeStore {
     });
   }
 
-  readonly #taxes = new MobxQuery({
+  readonly #taxes = new MobxQuery<Tax[], Error>({
     placeholderData: keepPreviousData,
     queryFn: ({ queryKey, pageParam }) => this.service.taxe.all(Object.assign({}, queryKey[1], pageParam)),
   });
