@@ -29,6 +29,7 @@ import { QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 import { TaxesPage } from './pages/taxes';
+import { WithdrawsPage } from './pages/withdraws/list';
 
 export const AppSettings = observer((props: { children: React.ReactNode }) => {
   const [initialized, setInitialized] = React.useState(true);
@@ -114,6 +115,10 @@ function App() {
               <Route
                 component={TaxesPage}
                 path={Routes.tax.list}
+              />
+              <Route
+                component={WithdrawsPage}
+                path={Routes.withdraw.list}
               />
               {/* <Route path="/users/:name">{(params) => <>Hello, {params.name}!</>}</Route> */}
 
