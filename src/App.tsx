@@ -33,6 +33,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 import { FaqsPage } from './pages/faqs/list';
 import { TransactionPage } from './pages/orders/transaction';
+import { TermsAndConditionsPage } from './pages/terms-and-conditions/list';
 
 export const AppSettings = observer((props: { children: React.ReactNode }) => {
   const [initialized, setInitialized] = React.useState(true);
@@ -124,6 +125,10 @@ function PrivateRoutes() {
           <Route
             component={FaqsPage}
             path={Routes.faqs.list}
+          />
+          <Route
+            component={TermsAndConditionsPage}
+            path={Routes.termsAndCondition.list}
           />
           <Route>404: No such page!</Route>
         </Switch>

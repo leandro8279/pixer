@@ -495,6 +495,29 @@ export interface FAQsQueryOptions extends QueryOptions {
   shop_id: string;
 }
 
+export interface TermsAndConditions {
+  id: string;
+  translated_languages: string[];
+  language: string;
+  title: string;
+  slug: string;
+  description: string;
+  shop_id?: string;
+  user_id: string;
+  created_at: string;
+  updated_at: string;
+  deleted_at?: string;
+  is_approved?: boolean;
+}
+
+export interface TermsAndConditionsQueryOptions extends QueryOptions {
+  title: string;
+  shop_id: string;
+  is_approved?: boolean;
+}
+
+export interface TermsAndConditionsPaginator extends PaginatorInfo<TermsAndConditions> {}
+
 export interface FAQsPaginator extends PaginatorInfo<FAQs> {}
 
 export interface MappedPaginatorInfo {

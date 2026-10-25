@@ -12,6 +12,7 @@ import { SettingsService } from './settings';
 import { ShopService } from './shop';
 import { TagService } from './tag';
 import { TaxeService } from './taxe';
+import { TermsAndConditionService } from './termsAndCondition';
 import { TypeService } from './type';
 import { UploadService } from './upload';
 import { WithdrawService } from './withdraw';
@@ -46,6 +47,7 @@ export class RootService extends BaseService {
   readonly tag = new TagService();
   readonly taxe = new TaxeService();
   readonly faq = new FaqService();
+  readonly termsAndCondition = new TermsAndConditionService();
 }
 
 export const rootService = RootService.getInstance();
