@@ -86,7 +86,7 @@ export function OrdersPage() {
                             )}
                           >
                             <DownloadIcon className="w-5 shrink-0" />
-                            <span className="whitespace-nowrap">{t('common:text-export-orders')}</span>
+                            <span className="whitespace-nowrap">{t('text-export-orders')}</span>
                           </button>
                         )}
                       </MenuItem>
