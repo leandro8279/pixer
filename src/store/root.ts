@@ -17,6 +17,7 @@ import { TaxeStore } from './taxe';
 import { TermsAndConditionStore } from './termsAndCondition';
 import { TypeStore } from './type';
 import { UploadStore } from './upload';
+import { UserStore } from './user';
 import { WithdrawStore } from './withdraw';
 
 export class RootStore {
@@ -38,6 +39,8 @@ export class RootStore {
   readonly taxe: TaxeStore;
   readonly faq: FaqStore;
   readonly termsAndCondition: TermsAndConditionStore;
+  readonly user: UserStore;
+
   constructor(private readonly service: RootService) {
     this.app = new AppStore();
     this.analytic = new AnalyticStore(this.service);
@@ -57,5 +60,6 @@ export class RootStore {
     this.taxe = new TaxeStore(this, this.service);
     this.faq = new FaqStore(this, this.service);
     this.termsAndCondition = new TermsAndConditionStore(this, this.service);
+    this.user = new UserStore(this, this.service);
   }
 }
