@@ -8,6 +8,7 @@ import { ManufacturerService } from './manufacturer';
 import { NotifyService } from './notify';
 import { OrderService } from './order';
 import { ProductService } from './product';
+import { ReviewService } from './review';
 import { SettingsService } from './settings';
 import { ShopService } from './shop';
 import { TagService } from './tag';
@@ -15,6 +16,7 @@ import { TaxeService } from './taxe';
 import { TermsAndConditionService } from './termsAndCondition';
 import { TypeService } from './type';
 import { UploadService } from './upload';
+import { UserService } from './user';
 import { WithdrawService } from './withdraw';
 
 export class RootService extends BaseService {
@@ -48,6 +50,8 @@ export class RootService extends BaseService {
   readonly taxe = new TaxeService();
   readonly faq = new FaqService();
   readonly termsAndCondition = new TermsAndConditionService();
+  readonly user = new UserService();
+  readonly review = new ReviewService();
 }
 
 export const rootService = RootService.getInstance();

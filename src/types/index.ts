@@ -536,6 +536,15 @@ export interface Review {
   abusive_reports: AbusiveReport[];
 }
 
+export interface ReviewQueryOptions extends Omit<QueryOptions, 'language'> {
+  name: string;
+  type: string;
+  shop_id: string;
+  product_id: number;
+}
+
+export interface ReviewPaginator extends PaginatorInfo<Review> {}
+
 export interface MappedPaginatorInfo {
   currentPage: number;
   firstPageUrl: string;
