@@ -5,6 +5,7 @@ import { AppStore } from './app';
 import { AuthStore } from './auth';
 import { AuthorStore } from './author';
 import { CategoryStore } from './category';
+import { FaqStore } from './faq';
 import { ManufacturerStore } from './manufacturer';
 import { NotifyStore } from './notify';
 import { OrderStore } from './order';
@@ -34,7 +35,7 @@ export class RootStore {
   readonly withdraw: WithdrawStore;
   readonly tag: TagStore;
   readonly taxe: TaxeStore;
-
+  readonly faq: FaqStore;
   constructor(private readonly service: RootService) {
     this.app = new AppStore();
     this.analytic = new AnalyticStore(this.service);
@@ -52,5 +53,6 @@ export class RootStore {
     this.withdraw = new WithdrawStore(this, this.service);
     this.tag = new TagStore(this, this.service);
     this.taxe = new TaxeStore(this, this.service);
+    this.faq = new FaqStore(this, this.service);
   }
 }

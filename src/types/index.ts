@@ -476,6 +476,27 @@ export interface Withdraw {
   updated_at?: string;
 }
 
+export interface FAQs {
+  id: string;
+  translated_languages: string[];
+  language: string;
+  faq_title: string;
+  slug: string;
+  faq_description: string;
+  shop_id?: string;
+  user_id: string;
+  created_at: string;
+  updated_at: string;
+  deleted_at?: string;
+}
+
+export interface FAQsQueryOptions extends QueryOptions {
+  faq_title: string;
+  shop_id: string;
+}
+
+export interface FAQsPaginator extends PaginatorInfo<FAQs> {}
+
 export interface MappedPaginatorInfo {
   currentPage: number;
   firstPageUrl: string;

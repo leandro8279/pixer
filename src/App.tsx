@@ -31,6 +31,7 @@ import { WithdrawsPage } from '@/pages/withdraws/list';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
+import { FaqsPage } from './pages/faqs/list';
 import { TransactionPage } from './pages/orders/transaction';
 
 export const AppSettings = observer((props: { children: React.ReactNode }) => {
@@ -119,6 +120,10 @@ function PrivateRoutes() {
           <Route
             component={TransactionPage}
             path={Routes.transaction}
+          />
+          <Route
+            component={FaqsPage}
+            path={Routes.faqs.list}
           />
           <Route>404: No such page!</Route>
         </Switch>

@@ -3,6 +3,7 @@ import { AuthService } from './auth';
 import { AuthorService } from './author';
 import { BaseService } from './base';
 import { CategoryService } from './category';
+import { FaqService } from './faq';
 import { ManufacturerService } from './manufacturer';
 import { NotifyService } from './notify';
 import { OrderService } from './order';
@@ -44,6 +45,7 @@ export class RootService extends BaseService {
   readonly withdraw = new WithdrawService();
   readonly tag = new TagService();
   readonly taxe = new TaxeService();
+  readonly faq = new FaqService();
 }
 
 export const rootService = RootService.getInstance();
