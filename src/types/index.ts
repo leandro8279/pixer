@@ -276,6 +276,14 @@ export enum SortOrder {
   Desc = 'desc',
 }
 
+export interface UserAddress {
+  country?: string;
+  city?: string;
+  state?: string;
+  zip?: string;
+  street_address?: string;
+}
+
 export interface QueryOptions {
   language: string;
   limit?: number;
