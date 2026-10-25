@@ -8,16 +8,15 @@ import { useTranslation } from 'react-i18next';
 import { useLocation } from 'wouter';
 
 import { ActionButtons } from '@/components/common/action-buttons';
+import { LanguageSwitcher } from '@/components/common/language-switcher';
+import { RenderComponent } from '@/components/common/render-component';
 import { NoDataFound } from '@/components/icons/no-data-found';
 import { Pagination } from '@/components/ui/pagination';
 import { Table } from '@/components/ui/table';
+import { TitleWithSort } from '@/components/ui/title-with-sort';
 import { Routes } from '@/config/routes';
 import { useRouter } from '@/hooks/useRouter';
 import { FAQs, MappedPaginatorInfo, SortOrder } from '@/types';
-
-import { LanguageSwitcher } from '../common/language-switcher';
-import { RenderComponent } from '../common/render-component';
-import { TitleWithSort } from '../ui/title-with-sort';
 
 dayjs.extend(relativeTime);
 dayjs.extend(utc);
