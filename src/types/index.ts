@@ -520,6 +520,22 @@ export interface TermsAndConditionsPaginator extends PaginatorInfo<TermsAndCondi
 
 export interface FAQsPaginator extends PaginatorInfo<FAQs> {}
 
+export interface Review {
+  id: number;
+  user_id: number;
+  product_id: number;
+  rating: number;
+  comment?: string;
+  photos?: Attachment[];
+  created_at: string;
+  updated_at: string;
+  positive_feedbacks_count?: number;
+  negative_feedbacks_count?: number;
+  product: Product;
+  user: User;
+  abusive_reports: AbusiveReport[];
+}
+
 export interface MappedPaginatorInfo {
   currentPage: number;
   firstPageUrl: string;
