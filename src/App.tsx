@@ -36,6 +36,7 @@ import { TransactionPage } from './pages/orders/transaction';
 import { TermsAndConditionsPage } from './pages/terms-and-conditions/list';
 import { AdminsPage } from './pages/users/admins';
 import { UsersPage } from './pages/users/list';
+import { MyStaffsPage } from './pages/users/my-staffs';
 import { VendorsPage } from './pages/users/vendors';
 import { VendorsPendingPage } from './pages/users/vendors-pending';
 
@@ -149,6 +150,10 @@ function PrivateRoutes() {
           <Route
             component={VendorsPendingPage}
             path={Routes.pendingVendorList}
+          />
+          <Route
+            component={MyStaffsPage}
+            path={Routes.myStaffs}
           />
           <Route>404: No such page!</Route>
         </Switch>

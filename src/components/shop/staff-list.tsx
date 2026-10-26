@@ -12,7 +12,7 @@ import { TitleWithSort } from '@/components/ui/title-with-sort';
 import { MappedPaginatorInfo, SortOrder, User } from '@/types';
 
 interface Props {
-  customers: User[];
+  staffs: User[];
   paginatorInfo: MappedPaginatorInfo | null;
   onPagination: (current: number) => void;
   onSort: (current: any) => void;
@@ -22,7 +22,7 @@ interface Props {
 export function StaffList(props: Props) {
   const { t } = useTranslation();
   const [sortingObj, setSortingObj] = useState<{ sort: SortOrder; column: any | null }>({ sort: SortOrder.Desc, column: null });
-  const { customers, paginatorInfo, onPagination, onSort, onOrder } = props;
+  const { staffs, paginatorInfo, onPagination, onSort, onOrder } = props;
 
   const onHeaderClick = (column: any | null) => ({
     onClick: () => {
@@ -98,7 +98,7 @@ export function StaffList(props: Props) {
               <p className="text-[13px]">{t('empty-table-sorry-text')}</p>
             </div>
           )}
-          data={customers as any}
+          data={staffs as any}
           rowKey="id"
           scroll={{ x: 1000 }}
         />
