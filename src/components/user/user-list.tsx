@@ -145,7 +145,7 @@ export function UserList(props: Props) {
       onHeaderCell: () => onHeaderClick('is_active'),
       render: (is_active: boolean) => (
         <Badge
-          textKey={is_active ? 'common:text-active' : 'common:text-inactive'}
+          textKey={is_active ? 'text-active' : 'text-inactive'}
           color={is_active ? 'bg-accent/10 !text-accent' : 'bg-status-failed/10 text-status-failed'}
         />
       ),
