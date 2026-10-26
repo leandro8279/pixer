@@ -17,8 +17,10 @@ import { ForgotPassword } from '@/pages/auth/forgot-password';
 import { LoginPage } from '@/pages/auth/login';
 import { CategoriesPage } from '@/pages/categories/list';
 import { DashboardPage } from '@/pages/dashboard';
+import { FaqsPage } from '@/pages/faqs/list';
 import { GroupsPage } from '@/pages/groups/list';
 import { OrdersPage } from '@/pages/orders/list';
+import { TransactionPage } from '@/pages/orders/transaction';
 import { DraftsPage } from '@/pages/products/drafts';
 import { InventoryPage } from '@/pages/products/inventory';
 import { ProductsPage } from '@/pages/products/list';
@@ -27,19 +29,17 @@ import { CreateShop } from '@/pages/shops/create';
 import { ShopsPage } from '@/pages/shops/list';
 import { TagsPage } from '@/pages/tags/list';
 import { TaxesPage } from '@/pages/taxes';
+import { TermsAndConditionsPage } from '@/pages/terms-and-conditions/list';
+import { AdminsPage } from '@/pages/users/admins';
+import { CustomersPage } from '@/pages/users/customers';
+import { UsersPage } from '@/pages/users/list';
+import { MyStaffsPage } from '@/pages/users/my-staffs';
+import { VendorStaffsPage } from '@/pages/users/vendor-staffs';
+import { VendorsPage } from '@/pages/users/vendors';
+import { VendorsPendingPage } from '@/pages/users/vendors-pending';
 import { WithdrawsPage } from '@/pages/withdraws/list';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-
-import { FaqsPage } from './pages/faqs/list';
-import { TransactionPage } from './pages/orders/transaction';
-import { TermsAndConditionsPage } from './pages/terms-and-conditions/list';
-import { AdminsPage } from './pages/users/admins';
-import { UsersPage } from './pages/users/list';
-import { MyStaffsPage } from './pages/users/my-staffs';
-import { VendorStaffsPage } from './pages/users/vendor-staffs';
-import { VendorsPage } from './pages/users/vendors';
-import { VendorsPendingPage } from './pages/users/vendors-pending';
 
 export const AppSettings = observer((props: { children: React.ReactNode }) => {
   const [initialized, setInitialized] = React.useState(true);
@@ -159,6 +159,10 @@ function PrivateRoutes() {
           <Route
             component={VendorStaffsPage}
             path={Routes.vendorStaffs}
+          />
+          <Route
+            component={CustomersPage}
+            path={Routes.customerList}
           />
           <Route>404: No such page!</Route>
         </Switch>
