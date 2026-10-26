@@ -37,6 +37,7 @@ import { TermsAndConditionsPage } from './pages/terms-and-conditions/list';
 import { AdminsPage } from './pages/users/admins';
 import { UsersPage } from './pages/users/list';
 import { VendorsPage } from './pages/users/vendors';
+import { VendorsPendingPage } from './pages/users/vendors-pending';
 
 export const AppSettings = observer((props: { children: React.ReactNode }) => {
   const [initialized, setInitialized] = React.useState(true);
@@ -144,6 +145,10 @@ function PrivateRoutes() {
           <Route
             component={VendorsPage}
             path={Routes.vendorList}
+          />
+          <Route
+            component={VendorsPendingPage}
+            path={Routes.pendingVendorList}
           />
           <Route>404: No such page!</Route>
         </Switch>
