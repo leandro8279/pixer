@@ -15,7 +15,7 @@ import { useRootStore } from '@/contexts/root';
 import { MappedPaginatorInfo, SortOrder, User } from '@/types';
 
 interface Props {
-  customers: User[];
+  admins: User[];
   paginatorInfo: MappedPaginatorInfo | null;
   onPagination: (current: number) => void;
   onSort: (current: any) => void;
@@ -41,7 +41,7 @@ const RenderUser = observer(({ isActive, userId }: { isActive: boolean; userId: 
 export function UserAdminList(props: Props) {
   const { t } = useTranslation();
   const [sortingObj, setSortingObj] = useState<{ sort: SortOrder; column: any | null }>({ sort: SortOrder.Desc, column: null });
-  const { customers, paginatorInfo, onPagination, onSort, onOrder } = props;
+  const { admins, paginatorInfo, onPagination, onSort, onOrder } = props;
 
   const onHeaderClick = (column: any | null) => ({
     onClick: () => {
@@ -60,7 +60,7 @@ export function UserAdminList(props: Props) {
     {
       title: (
         <TitleWithSort
-          title={t('table:table-item-id')}
+          title={t('table-item-id')}
           ascending={sortingObj.sort === SortOrder.Asc && sortingObj.column === 'id'}
           isActive={sortingObj.column === 'id'}
         />
@@ -71,12 +71,12 @@ export function UserAdminList(props: Props) {
       align: 'left',
       width: 150,
       onHeaderCell: () => onHeaderClick('id'),
-      render: (id: number) => `#${t('table:table-item-id')}: ${id}`,
+      render: (id: number) => `#${t('table-item-id')}: ${id}`,
     },
     {
       title: (
         <TitleWithSort
-          title={t('table:table-item-title')}
+          title={t('table-item-title')}
           ascending={sortingObj.sort === SortOrder.Asc && sortingObj.column === 'id'}
           isActive={sortingObj.column === 'id'}
         />
@@ -102,7 +102,7 @@ export function UserAdminList(props: Props) {
       ),
     },
     {
-      title: t('table:table-item-permissions'),
+      title: t('table-item-permissions'),
       dataIndex: 'permissions',
       key: 'permissions',
       align: 'left',
@@ -123,7 +123,7 @@ export function UserAdminList(props: Props) {
       },
     },
     {
-      title: t('table:table-item-available_wallet_points'),
+      title: t('table-item-available_wallet_points'),
       dataIndex: ['wallet', 'available_points'],
       key: 'available_wallet_points',
       align: 'center',
@@ -132,7 +132,7 @@ export function UserAdminList(props: Props) {
     {
       title: (
         <TitleWithSort
-          title={t('table:table-item-status')}
+          title={t('table-item-status')}
           ascending={sortingObj.sort === SortOrder.Asc && sortingObj.column === 'is_active'}
           isActive={sortingObj.column === 'is_active'}
         />
@@ -145,13 +145,13 @@ export function UserAdminList(props: Props) {
       onHeaderCell: () => onHeaderClick('is_active'),
       render: (is_active: boolean) => (
         <Badge
-          textKey={is_active ? 'common:text-active' : 'common:text-inactive'}
+          textKey={is_active ? 'text-active' : 'text-inactive'}
           color={is_active ? 'bg-accent/10 !text-accent' : 'bg-status-failed/10 text-status-failed'}
         />
       ),
     },
     {
-      title: t('table:table-item-actions'),
+      title: t('table-item-actions'),
       dataIndex: 'id',
       key: 'actions',
       align: 'right',
@@ -177,7 +177,7 @@ export function UserAdminList(props: Props) {
               <p className="text-[13px]">{t('empty-table-sorry-text')}</p>
             </div>
           )}
-          data={customers as any}
+          data={admins}
           rowKey="id"
           scroll={{ x: 1000 }}
         />
