@@ -5,12 +5,13 @@ import { useEffect } from 'react';
 import { useRootStore } from '@/contexts/root';
 import { SortOrder } from '@/types';
 
+const initialParams = { page: 1, name: '', orderBy: 'created_at', sortedBy: SortOrder.Desc, limit: 10, status: 'draft', language: 'en' };
 export const useDraftsPage = () => {
   const auth = useRootStore('auth');
   const product = useRootStore('product');
   const store = useLocalObservable(() => ({
     visible: true,
-    params: { page: 1, name: '', orderBy: 'created_at', sortedBy: SortOrder.Desc, limit: 10, status: 'draft', language: 'en' },
+    params: initialParams,
     setVisible(value: boolean) {
       this.visible = value;
     },
@@ -20,6 +21,7 @@ export const useDraftsPage = () => {
   }));
 
   useEffect(() => {
+    product.setInActiveProductsParams(initialParams);
     const dispose = reaction(
       () => ({ user: auth.me, params: store.params }),
       ({ params, user }) => product.setInActiveProductsParams({ ...params, user_id: user.id }),
