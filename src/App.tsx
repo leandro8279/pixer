@@ -41,6 +41,8 @@ import { WithdrawsPage } from '@/pages/withdraws/list';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
+import { CreateTypePage } from './pages/groups/create';
+
 export const AppSettings = observer((props: { children: React.ReactNode }) => {
   const [initialized, setInitialized] = React.useState(true);
   const { settings, settingsQuery } = useRootStore('setting');
@@ -99,6 +101,10 @@ function PrivateRoutes() {
           <Route
             component={GroupsPage}
             path={Routes.type.list}
+          />
+          <Route
+            component={CreateTypePage}
+            path={Routes.type.create}
           />
           <Route
             component={InventoryPage}
