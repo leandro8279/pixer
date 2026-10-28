@@ -1,5 +1,5 @@
 import cn from 'classnames';
-import { Observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react-lite';
 import { useEffect, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { useTranslation } from 'react-i18next';
@@ -32,7 +32,7 @@ interface Props {
   disabled?: boolean;
 }
 
-export function Uploader(props: Props) {
+export const Uploader = observer((props: Props) => {
   const { t } = useTranslation();
   const { onChange, value, multiple, acceptFile, helperText, maxSize, disabled } = props;
   const [files, setFiles] = useState<Attachment[]>(getPreviewImage(value));
@@ -64,7 +64,9 @@ export function Uploader(props: Props) {
               mergedData = data[0];
               setFiles(data);
             }
+
             if (onChange) {
+              console.log(JSON.stringify({ mergedData }, null, 2));
               onChange(mergedData);
             }
           },
@@ -217,20 +219,19 @@ export function Uploader(props: Props) {
         </RenderComponent>
       </div>
 
-      <Observer>
-        {() => (
-          <RenderComponent conditional={!!thumbs.length || upload.upload.isLoading}>
-            <aside className="flex flex-wrap mt-2">
-              <div className="flex items-center h-16 mt-2 ms-2">
-                <Loader
-                  simple={true}
-                  className="w-6 h-6"
-                />
-              </div>
-            </aside>
+      <RenderComponent conditional={!!thumbs.length || upload.upload.isLoading}>
+        <aside className="flex flex-wrap mt-2">
+          <RenderComponent conditional={!!thumbs.length}>{thumbs}</RenderComponent>
+          <RenderComponent conditional={upload.upload.isLoading}>
+            <div className="flex items-center h-16 mt-2 ms-2">
+              <Loader
+                simple={true}
+                className="w-6 h-6"
+              />
+            </div>
           </RenderComponent>
-        )}
-      </Observer>
+        </aside>
+      </RenderComponent>
     </section>
   );
-}
+});
