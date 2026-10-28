@@ -1,5 +1,7 @@
 import type { RootService } from '@/services/root';
 
+import { IRouter } from '@/contexts/root';
+
 import { AnalyticStore } from './analytic';
 import { AppStore } from './app';
 import { AuthStore } from './auth';
@@ -41,13 +43,16 @@ export class RootStore {
   readonly termsAndCondition: TermsAndConditionStore;
   readonly user: UserStore;
 
-  constructor(private readonly service: RootService) {
+  constructor(
+    private readonly service: RootService,
+    readonly router: IRouter,
+  ) {
     this.app = new AppStore();
     this.analytic = new AnalyticStore(this.service);
     this.auth = new AuthStore(this.service);
     this.setting = new SettingStore(this.service);
     this.shop = new ShopStore(this, this.service);
-    this.type = new TypeStore(this.service);
+    this.type = new TypeStore(this, this.service);
     this.upload = new UploadStore(this.service);
     this.notify = new NotifyStore(this, this.service);
     this.order = new OrderStore(this, service);
