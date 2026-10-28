@@ -6,6 +6,7 @@ export const useRouter = () => {
 
   return {
     searchParams,
+    back: () => window.history.back(),
     push: (url: string) => navigate(url),
     replace: (url: string) => navigate(url, { replace: true }),
   };
