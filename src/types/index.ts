@@ -8,7 +8,21 @@ export interface LoginRequest {
   password: string;
 }
 
+export interface TypeInput {
+  name: string;
+  icon?: any;
+  slug?: string | null;
+  promotional_sliders: AttachmentInput;
+}
+
 export type UserPermission = 'super_admin' | 'store_owner' | 'staff' | 'customer';
+
+export interface AttachmentInput {
+  thumbnail: string;
+  original: string;
+  id?: string;
+  file_name?: string;
+}
 
 export interface RegisterRequest {
   name: string;
