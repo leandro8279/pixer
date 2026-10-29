@@ -23,6 +23,16 @@ export interface CategoryInput {
   image: any;
   icon: any;
 }
+
+export interface TagInput {
+  name: string;
+  slug: string;
+  type?: any;
+  details: string;
+  image: any;
+  icon: any;
+}
+
 export type UserPermission = 'super_admin' | 'store_owner' | 'staff' | 'customer';
 
 export interface AttachmentInput {
