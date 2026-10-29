@@ -25,12 +25,17 @@ export interface CategoryInput {
 }
 
 export interface TagInput {
+  language: string;
   name: string;
   slug: string;
-  type?: any;
   details: string;
-  image: any;
-  icon: any;
+  image: {
+    thumbnail: string;
+    original: string;
+    id: string;
+  };
+  icon?: string;
+  type_id?: string;
 }
 
 export type UserPermission = 'super_admin' | 'store_owner' | 'staff' | 'customer';

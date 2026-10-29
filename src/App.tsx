@@ -43,6 +43,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 import { CreateCategoryPage } from './pages/categories/create';
 import { CreateTypePage } from './pages/groups/create';
+import { CreateTagPage } from './pages/tags/create';
 
 export const AppSettings = observer((props: { children: React.ReactNode }) => {
   const [initialized, setInitialized] = React.useState(true);
@@ -122,6 +123,10 @@ function PrivateRoutes() {
           <Route
             component={TagsPage}
             path={Routes.tag.list}
+          />
+          <Route
+            component={CreateTagPage}
+            path={Routes.tag.create}
           />
           <Route
             component={TaxesPage}
