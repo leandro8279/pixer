@@ -1,4 +1,3 @@
-import React from 'react';
 export const ProductIcon = ({ width = '15.6', height = '13' }) => {
   return (
     <svg

@@ -1,9 +1,4 @@
-import React from 'react';
-export const SiteSettingsIcon = ({
-  color = 'currentColor',
-  width = '56px',
-  height = '56px',
-}) => {
+export const SiteSettingsIcon = ({ color = 'currentColor', width = '56px', height = '56px' }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -12,7 +7,10 @@ export const SiteSettingsIcon = ({
       viewBox="0 0 56 56"
     >
       <g transform="translate(-0.001)">
-        <g data-name="Group 2845" transform="translate(0.001)">
+        <g
+          data-name="Group 2845"
+          transform="translate(0.001)"
+        >
           <g data-name="Group 2844">
             <path
               data-name="Path 2442"
@@ -22,7 +20,10 @@ export const SiteSettingsIcon = ({
             />
           </g>
         </g>
-        <g data-name="Group 2847" transform="translate(5.601 5.6)">
+        <g
+          data-name="Group 2847"
+          transform="translate(5.601 5.6)"
+        >
           <g data-name="Group 2846">
             <path
               data-name="Path 2443"
@@ -32,7 +33,10 @@ export const SiteSettingsIcon = ({
             />
           </g>
         </g>
-        <g data-name="Group 2849" transform="translate(1.868 46.667)">
+        <g
+          data-name="Group 2849"
+          transform="translate(1.868 46.667)"
+        >
           <g data-name="Group 2848">
             <path
               data-name="Path 2444"
@@ -42,7 +46,10 @@ export const SiteSettingsIcon = ({
             />
           </g>
         </g>
-        <g data-name="Group 2851" transform="translate(15.868 43.867)">
+        <g
+          data-name="Group 2851"
+          transform="translate(15.868 43.867)"
+        >
           <g data-name="Group 2850">
             <path
               data-name="Path 2445"
@@ -52,7 +59,10 @@ export const SiteSettingsIcon = ({
             />
           </g>
         </g>
-        <g data-name="Group 2853" transform="translate(29.868 40.133)">
+        <g
+          data-name="Group 2853"
+          transform="translate(29.868 40.133)"
+        >
           <g data-name="Group 2852">
             <path
               data-name="Path 2446"
@@ -62,7 +72,10 @@ export const SiteSettingsIcon = ({
             />
           </g>
         </g>
-        <g data-name="Group 2855" transform="translate(43.868 31.733)">
+        <g
+          data-name="Group 2855"
+          transform="translate(43.868 31.733)"
+        >
           <g data-name="Group 2854">
             <path
               data-name="Path 2447"
@@ -72,7 +85,10 @@ export const SiteSettingsIcon = ({
             />
           </g>
         </g>
-        <g data-name="Group 2857" transform="translate(1.356 18.702)">
+        <g
+          data-name="Group 2857"
+          transform="translate(1.356 18.702)"
+        >
           <g data-name="Group 2856">
             <path
               data-name="Path 2448"
@@ -82,7 +98,10 @@ export const SiteSettingsIcon = ({
             />
           </g>
         </g>
-        <g data-name="Group 2859" transform="translate(36.401 3.733)">
+        <g
+          data-name="Group 2859"
+          transform="translate(36.401 3.733)"
+        >
           <g data-name="Group 2858">
             <path
               data-name="Path 2449"
@@ -92,7 +111,10 @@ export const SiteSettingsIcon = ({
             />
           </g>
         </g>
-        <g data-name="Group 2861" transform="translate(41.774 22.245)">
+        <g
+          data-name="Group 2861"
+          transform="translate(41.774 22.245)"
+        >
           <g data-name="Group 2860">
             <path
               data-name="Path 2450"
@@ -102,7 +124,10 @@ export const SiteSettingsIcon = ({
             />
           </g>
         </g>
-        <g data-name="Group 2863" transform="translate(45.621 0.176)">
+        <g
+          data-name="Group 2863"
+          transform="translate(45.621 0.176)"
+        >
           <g data-name="Group 2862">
             <path
               data-name="Path 2451"
@@ -112,7 +137,10 @@ export const SiteSettingsIcon = ({
             />
           </g>
         </g>
-        <g data-name="Group 2865" transform="translate(37.772 0.187)">
+        <g
+          data-name="Group 2865"
+          transform="translate(37.772 0.187)"
+        >
           <g data-name="Group 2864">
             <path
               data-name="Path 2452"
@@ -122,7 +150,10 @@ export const SiteSettingsIcon = ({
             />
           </g>
         </g>
-        <g data-name="Group 2867" transform="translate(49.006 18.729)">
+        <g
+          data-name="Group 2867"
+          transform="translate(49.006 18.729)"
+        >
           <g data-name="Group 2866">
             <path
               data-name="Path 2453"
@@ -132,7 +163,10 @@ export const SiteSettingsIcon = ({
             />
           </g>
         </g>
-        <g data-name="Group 2869" transform="translate(53.519 12.099)">
+        <g
+          data-name="Group 2869"
+          transform="translate(53.519 12.099)"
+        >
           <g data-name="Group 2868">
             <path
               data-name="Path 2454"
@@ -142,7 +176,10 @@ export const SiteSettingsIcon = ({
             />
           </g>
         </g>
-        <g data-name="Group 2871" transform="translate(51.711 4.302)">
+        <g
+          data-name="Group 2871"
+          transform="translate(51.711 4.302)"
+        >
           <g data-name="Group 2870">
             <path
               data-name="Path 2455"
@@ -152,7 +189,10 @@ export const SiteSettingsIcon = ({
             />
           </g>
         </g>
-        <g data-name="Group 2873" transform="translate(32.455 4.355)">
+        <g
+          data-name="Group 2873"
+          transform="translate(32.455 4.355)"
+        >
           <g data-name="Group 2872">
             <path
               data-name="Path 2456"
@@ -162,7 +202,10 @@ export const SiteSettingsIcon = ({
             />
           </g>
         </g>
-        <g data-name="Group 2875" transform="translate(34.585 18.743)">
+        <g
+          data-name="Group 2875"
+          transform="translate(34.585 18.743)"
+        >
           <g data-name="Group 2874">
             <path
               data-name="Path 2457"
@@ -172,7 +215,10 @@ export const SiteSettingsIcon = ({
             />
           </g>
         </g>
-        <g data-name="Group 2877" transform="translate(31.735 12.154)">
+        <g
+          data-name="Group 2877"
+          transform="translate(31.735 12.154)"
+        >
           <g data-name="Group 2876">
             <path
               data-name="Path 2458"

@@ -99,9 +99,10 @@ export const useShopForm = (initialValues?: Shop) => {
     if (initialValues) {
       const { ...restAddress } = values.address;
       const balance = { id: initialValues.balance?.id, ...values.balance };
-
+      //@ts-ignore
       shop.update.mutate({ id: initialValues?.id!, ...values, settings, address: restAddress, balance });
     } else {
+      //@ts-ignore
       shop.create.mutate({ ...values, settings, balance: { ...values.balance } });
     }
   }

@@ -1,9 +1,4 @@
-import React from 'react';
-export const MembersIcon = ({
-  color = 'currentColor',
-  width = '56px',
-  height = '56px',
-}) => {
+export const MembersIcon = ({ color = 'currentColor', width = '56px', height = '56px' }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

@@ -1,4 +1,3 @@
-import React from 'react';
 export const DeliveryIcon = ({ width = '48px', height = '48px' }) => {
   return (
     <svg
@@ -7,7 +6,10 @@ export const DeliveryIcon = ({ width = '48px', height = '48px' }) => {
       height={height}
       viewBox="0 0 48 48"
     >
-      <g data-name="Group 2996" transform="translate(-1787 -804)">
+      <g
+        data-name="Group 2996"
+        transform="translate(-1787 -804)"
+      >
         <rect
           data-name="Rectangle 541"
           width="48"

@@ -1,4 +1,3 @@
-import React from 'react';
 export const OrderIcon = ({ width = '11.321', height = '13' }) => {
   return (
     <svg
@@ -7,7 +6,10 @@ export const OrderIcon = ({ width = '11.321', height = '13' }) => {
       height={height}
       viewBox="0 0 11.321 13"
     >
-      <g data-name="Group 1087" transform="translate(0)">
+      <g
+        data-name="Group 1087"
+        transform="translate(0)"
+      >
         <g data-name="Group 1086">
           <path
             data-name="Path 322"

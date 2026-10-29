@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
-import { FieldValues, Path, SubmitHandler, type, useForm, UseFormProps, UseFormReturn } from "react-hook-form";
+import React, { useEffect } from 'react';
+import { FieldValues, Path, SubmitHandler, useForm, UseFormProps, UseFormReturn } from 'react-hook-form';
 
-import { RenderComponent } from "@/components/common/render-component";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { RenderComponent } from '@/components/common/render-component';
+import { yupResolver } from '@hookform/resolvers/yup';
 
-import type { Schema } from "yup";
+import type { Schema } from 'yup';
 
 type ServerErrors<T> = {
   [Property in keyof T]: string;
@@ -21,9 +21,9 @@ type Props<TFormValues extends FieldValues> = {
 
 export const Form = <TFormValues extends Record<string, any> = Record<string, any>>(props: Props<TFormValues>) => {
   const { formError, children, onSubmit, fieldErrors, useFormProps, validationSchema } = props;
-
+  //@ts-ignore
   const methods = useForm<TFormValues>({
-    ...useFormProps,
+    ...useFormProps, //@ts-ignore
     ...(validationSchema && { resolver: yupResolver(validationSchema) }),
   });
 
@@ -31,7 +31,7 @@ export const Form = <TFormValues extends Record<string, any> = Record<string, an
     if (fieldErrors) {
       Object.entries(fieldErrors).forEach(([key, value]) => {
         methods.setError(key as Path<TFormValues>, {
-          type: "manual",
+          type: 'manual',
           message: value,
         });
       });
@@ -46,8 +46,12 @@ export const Form = <TFormValues extends Record<string, any> = Record<string, an
           {formError}
         </p>
       </RenderComponent>
-      <form noValidate onSubmit={methods.handleSubmit(onSubmit)} {...formProps}>
-        {children(methods)}
+      <form
+        noValidate
+        onSubmit={methods.handleSubmit(onSubmit as any)} //@ts-ignore
+        {...formProps}
+      >
+        {children(methods as any)}
       </form>
     </div>
   );

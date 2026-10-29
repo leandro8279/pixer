@@ -1,10 +1,4 @@
-import React from 'react';
-export const ArrowUp = ({
-  color = 'currentColor',
-  width = '12px',
-  height = '12px',
-  ...props
-}) => {
+export const ArrowUp = ({ color = 'currentColor', width = '12px', height = '12px', ...props }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

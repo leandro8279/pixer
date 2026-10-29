@@ -1,5 +1,3 @@
-import React from 'react';
-
 export const EditIcon = ({ ...props }) => {
   return (
     <svg
@@ -8,7 +6,10 @@ export const EditIcon = ({ ...props }) => {
       fill="currentColor"
       {...props}
     >
-      <g stroke="currentColor" strokeWidth=".4">
+      <g
+        stroke="currentColor"
+        strokeWidth=".4"
+      >
         <path
           data-name="Path 78"
           d="M18.659 12.688a.5.5 0 00-.5.5v4.423a1.5 1.5 0 01-1.494 1.494H2.691A1.5 1.5 0 011.2 17.609V4.629a1.5 1.5 0 011.494-1.494h4.419a.5.5 0 100-1H2.691A2.493 2.493 0 00.2 4.629v12.98A2.493 2.493 0 002.691 20.1h13.976a2.493 2.493 0 002.491-2.491v-4.423a.5.5 0 00-.5-.5zm0 0"

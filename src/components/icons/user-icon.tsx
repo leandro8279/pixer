@@ -1,4 +1,3 @@
-import React from 'react';
 export const UserIcon = ({ width = '48px', height = '48px' }) => {
   return (
     <svg
@@ -7,7 +6,10 @@ export const UserIcon = ({ width = '48px', height = '48px' }) => {
       height={height}
       viewBox="0 0 48 48"
     >
-      <g data-name="Group 2995" transform="translate(-612 -752)">
+      <g
+        data-name="Group 2995"
+        transform="translate(-612 -752)"
+      >
         <path
           data-name="Path 3647"
           d="M20,0h8A20,20,0,0,1,48,20v8A20,20,0,0,1,28,48H20A20,20,0,0,1,0,28V20A20,20,0,0,1,20,0Z"

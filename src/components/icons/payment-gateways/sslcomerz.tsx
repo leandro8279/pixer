@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 export const SSLComerz = ({ ...props }) => {
   return (
     <svg
@@ -11,7 +9,10 @@ export const SSLComerz = ({ ...props }) => {
       xmlnsXlink="http://www.w3.org/1999/xlink"
       {...props}
     >
-      <path fill="url(#pattern0)" d="M0 0H147.84V32H0z" />
+      <path
+        fill="url(#pattern0)"
+        d="M0 0H147.84V32H0z"
+      />
       <defs>
         <pattern
           id="pattern0"
@@ -19,7 +20,10 @@ export const SSLComerz = ({ ...props }) => {
           width={1}
           height={1}
         >
-          <use xlinkHref="#image0_920_646" transform="scale(.00216 .01)" />
+          <use
+            xlinkHref="#image0_920_646"
+            transform="scale(.00216 .01)"
+          />
         </pattern>
         <image
           id="image0_920_646"

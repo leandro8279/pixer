@@ -220,6 +220,30 @@ export interface CategoryQueryOptions extends QueryOptions {
 }
 export interface NotifyLogsPaginator extends PaginatorInfo<NotifyLogs> {}
 
+export interface Social {
+  type?: string;
+  link?: string;
+}
+
+export interface Profile {
+  id: string;
+  avatar?: Attachment;
+  bio?: string;
+  contact?: string;
+  socials?: Social[];
+  customer?: User;
+}
+
+export interface Address {
+  id: string;
+  title?: string;
+  default?: boolean;
+  address?: UserAddress;
+  type?: string;
+  customer?: User;
+  location: GoogleMapLocation;
+}
+
 export interface User {
   id: string;
   name: string;
@@ -240,6 +264,18 @@ export interface AuthResponse {
   permissions: string[];
   role: string;
 }
+export interface SocialInput {
+  type?: string;
+  link?: string;
+}
+
+export interface UserProfileInput {
+  id: string;
+  avatar?: AttachmentInput;
+  bio?: string;
+  socials?: SocialInput[];
+  contact?: string;
+}
 
 export interface RegisterInput {
   email: string;
@@ -247,6 +283,13 @@ export interface RegisterInput {
   name: string;
   shop_id?: number;
   // permission: Permission;
+}
+
+export interface UserAddressUpsertInput {
+  title: string;
+  default?: boolean;
+  address: UserAddressInput;
+  type: string;
 }
 
 export interface UpdateUser {
@@ -355,6 +398,130 @@ export interface PaginatorInfo<T> {
 
 export interface UserPaginator extends PaginatorInfo<User> {}
 
+export interface ContactDetails {
+  socials?: ShopSocials[];
+  contact?: string;
+  location?: Location;
+  website?: string;
+}
+
+export interface DeliveryTime {
+  description?: string;
+  title?: string;
+}
+
+export interface GoogleSettings {
+  isEnable?: boolean;
+  tagManagerId?: string;
+}
+
+export type SeoSettings = {
+  canonicalUrl?: string;
+  metaDescription?: string;
+  metaTags?: string;
+  metaTitle?: string;
+  ogDescription?: string;
+  ogImage?: Attachment;
+  ogTitle?: string;
+  twitterCardType?: string;
+  twitterHandle?: string;
+};
+
+export interface ShopSocials {
+  icon?: string;
+  url?: string;
+}
+
+export interface FacebookSettings {
+  appId?: string;
+  isEnable?: boolean;
+  pageId?: string;
+}
+
+export interface SettingCurrencyOptions {
+  formation?: any;
+  fractions?: number;
+}
+
+export interface PushNotificationEvent {
+  storeNotice?: boolean;
+  order?: boolean;
+  message?: boolean;
+}
+
+export interface SmsAdminEvent {
+  createOrder?: boolean;
+  deliverOrder?: boolean;
+  cancelOrder?: boolean;
+  statusChangeOrder?: boolean;
+  refundOrder?: boolean;
+}
+
+export interface SmsCustomerEvent {
+  createOrder?: boolean;
+  deliverOrder?: boolean;
+  cancelOrder?: boolean;
+  statusChangeOrder?: boolean;
+  refundOrder?: boolean;
+}
+
+export interface SmsVendorEvent {
+  createOrder?: boolean;
+  deliverOrder?: boolean;
+  cancelOrder?: boolean;
+  statusChangeOrder?: boolean;
+  refundOrder?: boolean;
+}
+
+export interface EmailEvent {
+  admin?: EmailAdminEvent;
+  vendor?: EmailVendorEvent;
+  customer?: EmailCustomerEvent;
+}
+export interface EmailAdminEvent {
+  createOrder?: boolean;
+  deliverOrder?: boolean;
+  cancelOrder?: boolean;
+  statusChangeOrder?: boolean;
+  refundOrder?: boolean;
+}
+export interface EmailCustomerEvent {
+  createOrder?: boolean;
+  deliverOrder?: boolean;
+  cancelOrder?: boolean;
+  statusChangeOrder?: boolean;
+  refundOrder?: boolean;
+}
+export interface EmailVendorEvent {
+  createOrder?: boolean;
+  deliverOrder?: boolean;
+  cancelOrder?: boolean;
+  statusChangeOrder?: boolean;
+  refundOrder?: boolean;
+}
+
+export interface SmsEvent {
+  admin?: SmsAdminEvent;
+  vendor?: SmsVendorEvent;
+  customer?: SmsCustomerEvent;
+}
+
+export interface PushNotification {
+  all?: PushNotificationEvent;
+}
+
+export interface GenerateDescriptionInput {
+  prompt: string;
+}
+
+export interface ServerInfo {
+  max_execution_time?: string;
+  max_input_time?: string;
+  memory_limit?: string;
+  post_max_size?: number;
+  upload_max_filesize?: number;
+}
+
 export interface SettingsOptions {
   siteTitle?: string;
   siteSubtitle?: string;
@@ -400,12 +567,73 @@ export interface SettingsOptions {
   isMultiCommissionRate?: boolean;
 }
 
+export interface PushNotification {
+  all?: PushNotificationEvent;
+}
+export interface Maintenance {
+  image: Attachment;
+  title: string;
+  description: string;
+  start: string;
+  until: string;
+  isUnderMaintenance: boolean;
+}
+
+export interface PromoPopupFormValues {
+  image?: Attachment;
+  title?: string;
+  description?: string;
+  popUpDelay?: number;
+  popUpExpiredIn?: number;
+  isPopUpNotShow?: boolean;
+  popUpNotShow?: {
+    title?: string;
+    popUpExpiredIn?: number;
+  };
+}
+
 export interface Settings {
   id: number;
   options: SettingsOptions;
   language: string;
   created_at: string;
   updated_at: string;
+}
+
+export interface DeliveryTimeInput {
+  title?: string;
+  description?: string;
+}
+
+export interface ContactDetailsInput {
+  socials?: ShopSocialInput[];
+  contact?: string;
+  location?: LocationInput;
+  website?: string;
+  emailAddress?: string;
+}
+
+export interface SeoSettingsInput {
+  metaTitle?: string;
+  metaDescription?: string;
+  metaTags?: string;
+  canonicalUrl?: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  ogImage?: AttachmentInput;
+  twitterHandle?: string;
+  twitterCardType?: string;
+}
+
+export interface GoogleSettingsInput {
+  isEnable?: boolean;
+  tagManagerId?: string;
+}
+
+export interface FacebookSettingsInput {
+  isEnable?: boolean;
+  appId?: string;
+  pageId?: string;
 }
 
 export interface SettingsOptionsInput {
@@ -467,6 +695,32 @@ export interface TodayTotalOrderByStatus {
   outForDelivery: number;
 }
 
+export interface Coupon {
+  id: string;
+  code: string;
+  description: string;
+  translated_languages: string[];
+  orders: Order[];
+  type: string;
+  image: string;
+  amount: number;
+  active_from: string;
+  expire_at: string;
+  created_at: string;
+  updated_at: string;
+  target?: boolean;
+  shop_id?: string;
+  is_approve?: boolean;
+}
+
+export interface WalletPoint {
+  id: number;
+  amount: number;
+  order_id: number;
+  created_at: string;
+  updated_at: string;
+}
+
 export interface Order {
   id: string;
   tracking_number: string;
@@ -498,6 +752,14 @@ export interface Order {
   shop_id?: string;
   shop?: Shop;
   note?: string;
+}
+
+export enum WithdrawStatus {
+  Approved = 'APPROVED',
+  Pending = 'PENDING',
+  OnHold = 'ON_HOLD',
+  Rejected = 'REJECTED',
+  Processing = 'PROCESSING',
 }
 
 export interface Withdraw {
@@ -573,6 +835,17 @@ export interface Review {
   abusive_reports: AbusiveReport[];
 }
 
+export interface AbusiveReport {
+  id?: number;
+  user_id?: number;
+  user: User[];
+  model_id: number;
+  model_type: string;
+  message: string;
+  created_at: string;
+  updated_at: string;
+}
+
 export interface ReviewQueryOptions extends Omit<QueryOptions, 'language'> {
   name: string;
   type: string;
@@ -600,6 +873,23 @@ export interface MappedPaginatorInfo {
 export enum ProductType {
   Simple = 'simple',
   Variable = 'variable',
+}
+
+export interface PaymentInfo {
+  account: number;
+  name: string;
+  email: string;
+  bank: string;
+}
+
+export interface Balance {
+  id?: string;
+  admin_commission_rate?: number;
+  shop?: Shop;
+  total_earnings?: number;
+  withdrawn_amount?: number;
+  current_balance?: number;
+  payment_info?: PaymentInfo;
 }
 
 export interface Shop {
@@ -632,6 +922,83 @@ export interface WithdrawQueryOptions extends Omit<QueryOptions, 'language'> {
 }
 
 export interface WithdrawPaginator extends PaginatorInfo<Withdraw> {}
+
+export interface AttributeValueQueryOptions extends QueryOptions {
+  type: string;
+  name: string;
+}
+
+export interface Attribute {
+  id: string;
+  name: string;
+  slug: string;
+  values: AttributeValue[];
+  shop_id?: number;
+  translated_languages: string[];
+  language?: string;
+}
+
+export interface VariationProductPivot {
+  price?: number;
+}
+
+export interface AttributeValueInput {
+  id?: number;
+  value: string;
+  meta?: string;
+}
+
+export interface AttributeValue {
+  id: string;
+  value?: string;
+  attribute?: Attribute;
+  products: Product[];
+  pivot?: VariationProductPivot;
+  meta?: string;
+}
+
+export enum ProductStatus {
+  Publish = 'publish',
+  Draft = 'draft',
+  UnderReview = 'under_review',
+  Approved = 'approved',
+  UnPublish = 'unpublish',
+  Rejected = 'rejected',
+}
+
+export interface DigitalFile {
+  created_at?: string;
+  id: string;
+  attachment_id: string;
+  file_name: string;
+  updated_at?: string;
+  url: string;
+}
+
+export interface VariationOption {
+  name?: string;
+  value?: string;
+}
+
+export interface Variation {
+  id?: string;
+  title?: string;
+  image?: Attachment;
+  digital_files?: DigitalFile;
+  price?: number;
+  sku?: string;
+  is_disable?: boolean;
+  sale_price?: number;
+  quantity?: number;
+  options?: VariationOption[];
+}
+
+export interface OrderProductPivot {
+  order_quantity?: number;
+  unit_price?: number;
+  subtotal?: number;
+  variation_option_id?: string;
+}
 
 export interface Product {
   id: string;
@@ -736,6 +1103,18 @@ export interface OrderQueryOptions extends QueryOptions {
   with: string;
 }
 
+export interface InvoiceTranslatedText {
+  subtotal: string;
+  discount: string;
+  tax: string;
+  delivery_fee: string;
+  total: string;
+  products: string;
+  quantity: string;
+  invoice_no: string;
+  date: string;
+}
+
 export interface GenerateInvoiceDownloadUrlInput {
   order_id: string;
   translated_text?: InvoiceTranslatedText;
@@ -749,6 +1128,78 @@ export interface TypeQueryOptions extends QueryOptions {
 export interface GetParams {
   slug: string;
   language: string;
+}
+
+export interface TypeSettingsInput {
+  isHome?: boolean;
+  layoutType?: string;
+  productCard?: string;
+  bestSelling: {
+    enable?: boolean;
+    title?: string;
+  };
+  popularProducts: {
+    enable?: boolean;
+    title?: string;
+  };
+  category: {
+    enable?: boolean;
+    title?: string;
+  };
+  handpickedProducts: {
+    enable?: boolean;
+    title?: string;
+    products?: Product[];
+    enableSlider?: boolean;
+  };
+  newArrival: {
+    enable?: boolean;
+    title?: string;
+  };
+  authors: {
+    enable?: boolean;
+    title?: string;
+  };
+  manufactures: {
+    enable?: boolean;
+    title?: string;
+  };
+}
+
+export interface TypeSettings {
+  isHome?: boolean;
+  layoutType?: string;
+  productCard?: string;
+  bestSelling: {
+    enable?: boolean;
+    title?: string;
+  };
+  popularProducts: {
+    enable?: boolean;
+    title?: string;
+  };
+  category: {
+    enable?: boolean;
+    title?: string;
+  };
+  handpickedProducts: {
+    enable?: boolean;
+    title?: string;
+    products?: Product[];
+    enableSlider?: boolean;
+  };
+  newArrival: {
+    enable?: boolean;
+    title?: string;
+  };
+  authors: {
+    enable?: boolean;
+    title?: string;
+  };
+  manufactures: {
+    enable?: boolean;
+    title?: string;
+  };
 }
 
 export interface Type {
@@ -795,6 +1246,36 @@ export interface ShopInput {
   settings?: ShopSettingsInput;
   categories?: Category[];
   balance?: BalanceInput;
+}
+
+export interface LocationInput {
+  lat?: number;
+  lng?: number;
+  street_number?: string;
+  route?: string;
+  street_address?: string;
+  city?: string;
+  state?: string;
+  country?: string;
+  zip?: string;
+  formattedAddress?: string;
+}
+
+export interface shopMaintenanceInput {
+  image: Attachment;
+  title: string;
+  description: string;
+  start: Date;
+  until: Date;
+}
+
+export interface ShopSettingsInput {
+  socials?: ShopSocialInput[];
+  contact?: string;
+  location?: LocationInput;
+  website?: string;
+  isShopUnderMaintenance?: string;
+  shopMaintenance: shopMaintenanceInput;
 }
 
 export interface BalanceInput {

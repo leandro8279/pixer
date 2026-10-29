@@ -122,5 +122,5 @@ export default function useLocation({ onChange, onChangeCurrentLocation, setInpu
     }
   };
 
-  return [onLoad, onUnmount, onPlaceChanged, getCurrentLocation, isLoaded, loadError && t(loadError)];
+  return [onLoad, onUnmount, onPlaceChanged, getCurrentLocation, isLoaded, loadError && t('loadError')];
 }

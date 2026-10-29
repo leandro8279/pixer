@@ -50,6 +50,7 @@ export function ReviewList(props: Props) {
   });
 
   function openAbuseReportModal(id: string) {
+    alert(id);
     // openModal('ABUSE_REPORT', {
     //   model_id: id,
     //   model_type: 'Review',

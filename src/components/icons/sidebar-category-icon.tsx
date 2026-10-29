@@ -1,4 +1,3 @@
-import React from 'react';
 export const SidebarCategoryIcon = ({ width = '12.958', height = '13' }) => {
   return (
     <svg

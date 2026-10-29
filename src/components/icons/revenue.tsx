@@ -1,10 +1,4 @@
-import React from 'react';
-export const Revenue = ({
-  color = 'currentColor',
-  width = '56px',
-  height = '56px',
-  ...props
-}) => {
+export const Revenue = ({ color = 'currentColor', width = '56px', height = '56px', ...props }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -13,7 +7,10 @@ export const Revenue = ({
       viewBox="0 0 56 56"
       {...props}
     >
-      <g data-name="Group 2541" transform="translate(-1719 -150)">
+      <g
+        data-name="Group 2541"
+        transform="translate(-1719 -150)"
+      >
         <path
           data-name="Path 2087"
           d="M28,0A28,28,0,1,1,0,28,28,28,0,0,1,28,0Z"
@@ -21,7 +18,10 @@ export const Revenue = ({
           fill="#00c58d"
           opacity="0.2"
         />
-        <g data-name="Group 2542" transform="translate(1734.867 165.867)">
+        <g
+          data-name="Group 2542"
+          transform="translate(1734.867 165.867)"
+        >
           <path
             data-name="Path 2088"
             d="M3854.718,4669.131a.507.507,0,0,0-.359-.15l-.048,0-8.585.831a.511.511,0,0,0-.31.864l1.58,1.58-12.093,12.093a.507.507,0,0,0,0,.718l3.877,3.877a.511.511,0,0,0,.718,0l2.112-2.111a.508.508,0,0,0,.148-.359.507.507,0,0,0-.867-.358l-1.753,1.752-3.159-3.159,12.093-12.094a.506.506,0,0,0,0-.717l-1.177-1.178,6.9-.668-.667,6.9-1.178-1.177a.506.506,0,0,0-.718,0l-9.166,9.165a.508.508,0,1,0,.719.718l8.806-8.806,1.579,1.579a.5.5,0,0,0,.353.146h0a.507.507,0,0,0,.512-.455l.831-8.585A.5.5,0,0,0,3854.718,4669.131Z"

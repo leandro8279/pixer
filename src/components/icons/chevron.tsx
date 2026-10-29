@@ -1,11 +1,4 @@
-import * as React from 'react';
-
-export const Chevron = ({
-  color = 'currentColor',
-  width = '12',
-  height = '7',
-  ...props
-}) => {
+export const Chevron = ({ color = 'currentColor', width = '12', height = '7', ...props }) => {
   return (
     <svg
       width={width}

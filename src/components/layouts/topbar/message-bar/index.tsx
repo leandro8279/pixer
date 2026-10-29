@@ -1,10 +1,4 @@
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-
-import { Menu, MenuButton } from '@headlessui/react';
-
 export function MessageBar() {
-  const { t } = useTranslation();
   return (
     // <Menu
     //   as="div"

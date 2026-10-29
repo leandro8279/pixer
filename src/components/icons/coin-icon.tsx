@@ -1,4 +1,3 @@
-import React from 'react';
 export const CoinIcon = ({ width = '48px', height = '48px' }) => {
   return (
     <svg
@@ -7,7 +6,10 @@ export const CoinIcon = ({ width = '48px', height = '48px' }) => {
       height={height}
       viewBox="0 0 48 48"
     >
-      <g data-name="Group 2993" transform="translate(-608 -807)">
+      <g
+        data-name="Group 2993"
+        transform="translate(-608 -807)"
+      >
         <path
           data-name="Path 3646"
           d="M20,0h8A20,20,0,0,1,48,20v8A20,20,0,0,1,28,48H20A20,20,0,0,1,0,28V20A20,20,0,0,1,20,0Z"
@@ -15,7 +17,10 @@ export const CoinIcon = ({ width = '48px', height = '48px' }) => {
           fill="#ffe8b2"
         />
         <g transform="translate(620 819)">
-          <g data-name="Group 2982" transform="translate(0)">
+          <g
+            data-name="Group 2982"
+            transform="translate(0)"
+          >
             <g data-name="Group 2981">
               <path
                 data-name="Path 3639"
@@ -25,7 +30,10 @@ export const CoinIcon = ({ width = '48px', height = '48px' }) => {
               />
             </g>
           </g>
-          <g data-name="Group 2984" transform="translate(8.284 4.519)">
+          <g
+            data-name="Group 2984"
+            transform="translate(8.284 4.519)"
+          >
             <g data-name="Group 2983">
               <path
                 data-name="Path 3640"
