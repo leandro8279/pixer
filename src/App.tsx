@@ -41,6 +41,7 @@ import { WithdrawsPage } from '@/pages/withdraws/list';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
+import { CreateCategoryPage } from './pages/categories/create';
 import { CreateTypePage } from './pages/groups/create';
 
 export const AppSettings = observer((props: { children: React.ReactNode }) => {
@@ -113,6 +114,10 @@ function PrivateRoutes() {
           <Route
             component={CategoriesPage}
             path={Routes.category.list}
+          />
+          <Route
+            component={CreateCategoryPage}
+            path={Routes.category.create}
           />
           <Route
             component={TagsPage}
