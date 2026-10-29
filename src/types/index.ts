@@ -15,6 +15,14 @@ export interface TypeInput {
   promotional_sliders: AttachmentInput;
 }
 
+export interface CategoryInput {
+  name: string;
+  slug: string;
+  details: string;
+  parent: any;
+  image: any;
+  icon: any;
+}
 export type UserPermission = 'super_admin' | 'store_owner' | 'staff' | 'customer';
 
 export interface AttachmentInput {
