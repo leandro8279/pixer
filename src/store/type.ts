@@ -5,12 +5,14 @@ import { toast } from 'react-toastify';
 import { API_ENDPOINTS } from '@/config/endpoints';
 import { Routes } from '@/config/routes';
 import { RootService } from '@/services/root';
-import { GetParams, Type, TypeInput, TypeQueryOptions } from '@/types';
+import { GetParams, SortOrder, Type, TypeInput, TypeQueryOptions } from '@/types';
 import { keepPreviousData } from '@tanstack/react-query';
 
 import { MobxMutation } from './mutation';
 import { MobxQuery } from './query';
 import { RootStore } from './root';
+
+const initialParams = { name: '', orderBy: 'created_at', sortedBy: SortOrder.Desc, language: 'en' } as Partial<TypeQueryOptions>;
 
 export class TypeStore {
   _state = { slug: '', params: { language: 'en' } as Partial<TypeQueryOptions> };
@@ -48,14 +50,14 @@ export class TypeStore {
   readonly #create = new MobxMutation<Type, Error, TypeInput>({
     mutationFn: (variables) => this.service.type.create(variables),
     onSuccess: () => {
-      this.#types.refetch();
+      this.setParams(initialParams);
       toast.success(i18next.t('successfully-created'));
       this.root.router.push(Routes.type.list);
     },
   });
 
   readonly #update = new MobxMutation<Type, Error, TypeInput & { id: string }>({
-    onSettled: () => this.#types.refetch(),
+    onSettled: () => this.setParams(initialParams),
     mutationFn: (variables) => this.service.type.update(variables),
     onSuccess: () => toast.success(i18next.t('successfully-updated')),
   });
