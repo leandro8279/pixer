@@ -50,18 +50,22 @@ export class TypeStore {
   readonly #create = new MobxMutation<Type, Error, TypeInput>({
     mutationFn: (variables) => this.service.type.create(variables),
     onSuccess: () => {
-      this.setParams(initialParams);
+      this.refetch();
       toast.success(i18next.t('successfully-created'));
       this.root.router.push(Routes.type.list);
     },
   });
 
   readonly #update = new MobxMutation<Type, Error, TypeInput & { id: string }>({
-    onSettled: () => this.setParams(initialParams),
+    onSettled: () => this.refetch(),
     mutationFn: (variables) => this.service.type.update(variables),
     onSuccess: () => toast.success(i18next.t('successfully-updated')),
   });
 
+  private refetch() {
+    this.setParams(initialParams);
+    this.typesQuery.refetch();
+  }
   get typeQuery() {
     return this.#type.query({
       enabled: Boolean(this._state.slug),
