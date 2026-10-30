@@ -28,7 +28,7 @@ import { ProductStockPage } from '@/pages/products/product-stock';
 import { CreateShop } from '@/pages/shops/create';
 import { ShopsPage } from '@/pages/shops/list';
 import { TagsPage } from '@/pages/tags/list';
-import { TaxesPage } from '@/pages/taxes';
+import { TaxesPage } from '@/pages/taxes/list';
 import { TermsAndConditionsPage } from '@/pages/terms-and-conditions/list';
 import { AdminsPage } from '@/pages/users/admins';
 import { CustomersPage } from '@/pages/users/customers';
@@ -44,6 +44,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { CreateCategoryPage } from './pages/categories/create';
 import { CreateTypePage } from './pages/groups/create';
 import { CreateTagPage } from './pages/tags/create';
+import { CreateTaxePage } from './pages/taxes/create';
 
 export const AppSettings = observer((props: { children: React.ReactNode }) => {
   const [initialized, setInitialized] = React.useState(true);
@@ -131,6 +132,10 @@ function PrivateRoutes() {
           <Route
             component={TaxesPage}
             path={Routes.tax.list}
+          />
+          <Route
+            component={CreateTaxePage}
+            path={Routes.tax.create}
           />
           <Route
             component={WithdrawsPage}

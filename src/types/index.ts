@@ -208,6 +208,10 @@ export interface Tax {
   id?: string;
   name?: string;
   rate?: number;
+  city?: string;
+  country?: string;
+  state?: string;
+  zip?: string;
 }
 
 export interface CategoryPaginator extends PaginatorInfo<Category> {}
