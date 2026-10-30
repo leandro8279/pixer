@@ -1,6 +1,9 @@
-const CartCheckBag: React.FC<React.SVGAttributes<{}>> = (props) => {
+export const CartCheckBagIcon: React.FC<React.SVGAttributes<{}>> = (props) => {
   return (
-    <svg {...props} viewBox="0 0 12.686 16">
+    <svg
+      {...props}
+      viewBox="0 0 12.686 16"
+    >
       <g transform="translate(-27.023 -2)">
         <g transform="translate(27.023 5.156)">
           <g>
@@ -24,5 +27,3 @@ const CartCheckBag: React.FC<React.SVGAttributes<{}>> = (props) => {
     </svg>
   );
 };
-
-export default CartCheckBag;

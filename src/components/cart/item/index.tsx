@@ -1,0 +1,70 @@
+import { motion } from 'framer-motion';
+import { observer } from 'mobx-react-lite';
+import { useTranslation } from 'react-i18next';
+
+import { CloseIcon } from '@/components/icons/close-icon';
+import { Counter } from '@/components/ui/counter';
+import { useRootStore } from '@/contexts/root';
+import { usePrice } from '@/hooks/usePrice';
+import { fadeInOut } from '@/utils/motion/fade-in-out';
+
+import { useCartItem } from './useCartItem';
+
+interface Props {
+  item: any;
+}
+
+export const CartItem = observer(({ item }: Props) => {
+  const { t } = useTranslation();
+  const cart = useRootStore('cart');
+  const { handleIncrement, handleRemoveClick } = useCartItem(item);
+
+  const outOfStock = !cart.isInStock(item.id);
+  const { price } = usePrice({ amount: item.price });
+  const { price: itemPrice } = usePrice({ amount: item.itemTotal });
+
+  return (
+    <motion.div
+      layout
+      initial="from"
+      animate="to"
+      exit="from"
+      variants={fadeInOut(0.25) as any}
+      className="flex items-center border-b border-solid border-border-200 border-opacity-75 px-4 py-4 text-sm sm:px-6"
+    >
+      <div className="shrink-0">
+        <Counter
+          value={item.quantity}
+          onDecrement={handleRemoveClick}
+          onIncrement={handleIncrement}
+          variant="pillVertical"
+          disabled={outOfStock}
+        />
+      </div>
+
+      <div className="relative mx-4 flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden bg-gray-100 sm:h-16 sm:w-16">
+        <img
+          src={item?.image ?? '/'}
+          alt={item.name}
+          sizes="(max-width: 768px) 100vw"
+          className="object-contain"
+        />
+      </div>
+      <div>
+        <h3 className="font-bold text-heading">{item.name}</h3>
+        <p className="my-2.5 font-semibold text-accent">{price}</p>
+        <span className="text-xs text-body">
+          {item.quantity} X {item.unit}
+        </span>
+      </div>
+      <span className="font-bold text-heading ms-auto">{itemPrice}</span>
+      <button
+        className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-muted transition-all duration-200 -me-2 ms-3 hover:bg-gray-100 hover:text-red-600 focus:bg-gray-100 focus:text-red-600 focus:outline-none"
+        onClick={() => cart.clearItemFromCart(item.id)}
+      >
+        <span className="sr-only">{t('text-close')}</span>
+        <CloseIcon className="h-3 w-3" />
+      </button>
+    </motion.div>
+  );
+});
