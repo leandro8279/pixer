@@ -185,7 +185,11 @@ export const siteSettings = {
             label: 'sidebar-nav-item-orders',
             icon: 'OrdersIcon',
           },
-
+          {
+            href: Routes.order.create,
+            label: 'sidebar-nav-item-create-order',
+            icon: 'CreateOrderIcon',
+          },
           {
             href: Routes.transaction,
             label: 'text-transactions',
