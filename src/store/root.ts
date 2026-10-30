@@ -6,6 +6,7 @@ import { AnalyticStore } from './analytic';
 import { AppStore } from './app';
 import { AuthStore } from './auth';
 import { AuthorStore } from './author';
+import { CartStore } from './cart';
 import { CategoryStore } from './category';
 import { FaqStore } from './faq';
 import { ManufacturerStore } from './manufacturer';
@@ -42,12 +43,14 @@ export class RootStore {
   readonly faq: FaqStore;
   readonly termsAndCondition: TermsAndConditionStore;
   readonly user: UserStore;
+  readonly cart: CartStore;
 
   constructor(
     private readonly service: RootService,
     readonly router: IRouter,
   ) {
     this.app = new AppStore();
+    this.cart = new CartStore();
     this.analytic = new AnalyticStore(this.service);
     this.auth = new AuthStore(this.service);
     this.setting = new SettingStore(this.service);

@@ -5,6 +5,7 @@ export class AppStore {
     miniSidebar: false,
     displaySidebar: false,
     isMaintenanceMode: false,
+    displayCartSidebar: false,
     isMaintenanceModeStart: false,
   };
 
@@ -28,6 +29,10 @@ export class AppStore {
     return this._state.displaySidebar;
   }
 
+  get displayCartSidebar() {
+    return this._state.displayCartSidebar;
+  }
+
   setMiniSidebar(value: boolean) {
     this._state.miniSidebar = value;
   }
@@ -43,4 +48,8 @@ export class AppStore {
   closeSidebar() {}
 
   toggleSidebar() {}
+
+  openCartSidebar() {}
+
+  closeCartSidebar() {}
 }
