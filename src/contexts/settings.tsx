@@ -14,6 +14,7 @@ const initialState = {
   externalText: '',
   externalLink: '',
   currency: 'USD',
+  deliveryTime: [],
   currencyOptions: { formation: 'en-US', fractions: 2 },
   logo: { id: 1, thumbnail: '/logo.svg', original: '/logo.svg' },
 };

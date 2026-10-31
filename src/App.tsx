@@ -43,6 +43,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 import { CreateCategoryPage } from './pages/categories/create';
 import { CreateTypePage } from './pages/groups/create';
+import { CheckoutPage } from './pages/orders/checkout';
 import { CreateOrderPage } from './pages/orders/create';
 import { CreateTagPage } from './pages/tags/create';
 import { CreateTaxePage } from './pages/taxes/create';
@@ -89,6 +90,10 @@ function PrivateRoutes() {
           <Route
             component={CreateShop}
             path={Routes.shop.create}
+          />
+          <Route
+            component={CheckoutPage}
+            path={Routes.checkout}
           />
           <Route
             component={ProductsPage}

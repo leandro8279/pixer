@@ -8,6 +8,7 @@ import { AuthStore } from './auth';
 import { AuthorStore } from './author';
 import { CartStore } from './cart';
 import { CategoryStore } from './category';
+import { CheckoutStore } from './checkout';
 import { FaqStore } from './faq';
 import { ManufacturerStore } from './manufacturer';
 import { NotifyStore } from './notify';
@@ -44,6 +45,7 @@ export class RootStore {
   readonly termsAndCondition: TermsAndConditionStore;
   readonly user: UserStore;
   readonly cart: CartStore;
+  readonly checkout: CheckoutStore;
 
   constructor(
     private readonly service: RootService,
@@ -51,6 +53,7 @@ export class RootStore {
   ) {
     this.app = new AppStore();
     this.cart = new CartStore();
+    this.checkout = new CheckoutStore();
     this.analytic = new AnalyticStore(this.service);
     this.auth = new AuthStore(this.service);
     this.setting = new SettingStore(this.service);

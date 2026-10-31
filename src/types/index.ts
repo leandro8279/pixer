@@ -204,6 +204,19 @@ export interface TaxQueryOptions extends QueryOptions {
   name: string;
 }
 
+export enum AddressType {
+  Billing = 'billing',
+  Shipping = 'shipping',
+}
+
+export type PaymentMethodName = 'CASH_ON_DELIVERY' | 'CASH';
+
+export enum CouponType {
+  FIXED = 'fixed',
+  PERCENTAGE = 'percentage',
+  FREE_SHIPPING = 'free_shipping',
+}
+
 export interface Tax {
   id?: string;
   name?: string;
@@ -535,6 +548,7 @@ export interface SettingsOptions {
   defaultPaymentGateway?: string;
   useOtp?: boolean;
   useAi?: boolean;
+  created_atoptions: any;
   contactDetails?: ContactDetails;
   minimumOrderAmount?: number;
   currencyToWalletRatio?: number;

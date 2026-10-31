@@ -47,7 +47,6 @@ export class CartStore {
   dispatch(act: Action) {
     this._state = cartReducer(this._state, act);
     this.saveCart(JSON.stringify(this._state));
-    console.log(JSON.stringify({ state: this.state }, null, 2));
   }
 
   isInStock(id: Item['id']) {
@@ -63,7 +62,6 @@ export class CartStore {
   }
 
   addItemToCart(item: Item, quantity: number) {
-    console.log(JSON.stringify({ item, quantity }, null, 2));
     this.dispatch({ type: 'ADD_ITEM_WITH_QUANTITY', item, quantity });
   }
 
