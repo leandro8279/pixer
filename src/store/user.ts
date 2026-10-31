@@ -1,13 +1,18 @@
+import i18next from 'i18next';
 import { action, computed, makeObservable, observable } from 'mobx';
+import { toast } from 'react-toastify';
 
 import { API_ENDPOINTS } from '@/config/endpoints';
 import { RootService } from '@/services/root';
-import { UserPaginator, UserQueryOptions } from '@/types';
+import { AuthResponse, RegisterInput, SortOrder, UserPaginator, UserQueryOptions } from '@/types';
 import { mapPaginatorData } from '@/utils/data-mappers';
 import { keepPreviousData } from '@tanstack/react-query';
 
+import { MobxMutation } from './mutation';
 import { MobxQuery } from './query';
 import { RootStore } from './root';
+
+const initialParams = { page: 1, limit: 20, name: '', orderBy: 'created_at', sortedBy: SortOrder.Desc };
 
 export class UserStore {
   readonly _state = {
@@ -89,11 +94,22 @@ export class UserStore {
     queryFn: ({ queryKey, pageParam }) => this.service.user.getAllStaffs(Object.assign({}, queryKey[1], pageParam)),
   });
 
+  readonly #register = new MobxMutation<AuthResponse, Error, RegisterInput>({
+    onSettled: () => this.usersRefetch(),
+    mutationFn: (variables) => this.service.auth.register(variables),
+    onSuccess: () => toast.success(i18next.t('successfully-register'), { toastId: 'successRegister' }),
+  });
+
   get usersQuery() {
     return this.#users.query({
       queryKey: [API_ENDPOINTS.USERS, this._state.params],
       enabled: Boolean(this.root.auth.isAuthenticated && Object.keys(this._state.params).length),
     });
+  }
+
+  private usersRefetch() {
+    this.setParams(initialParams);
+    this.usersQuery.refetch();
   }
 
   get adminUsersQuery() {
@@ -175,6 +191,10 @@ export class UserStore {
     return mapPaginatorData(this.userStaffsQuery.data);
   }
 
+  get register() {
+    return this.#register;
+  }
+
   get staffsPaginatorInfo() {
     return mapPaginatorData(this.staffsQuery.data);
   }
@@ -210,5 +230,6 @@ export class UserStore {
     this.#customers.dispose();
     this.#userStaffs.dispose();
     this.#staffs.dispose();
+    this.#register.dispose();
   }
 }

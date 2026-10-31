@@ -47,6 +47,7 @@ import { CheckoutPage } from './pages/orders/checkout';
 import { CreateOrderPage } from './pages/orders/create';
 import { CreateTagPage } from './pages/tags/create';
 import { CreateTaxePage } from './pages/taxes/create';
+import { CreateUserPage } from './pages/users/create';
 
 export const AppSettings = observer((props: { children: React.ReactNode }) => {
   const [initialized, setInitialized] = React.useState(true);
@@ -170,6 +171,10 @@ function PrivateRoutes() {
           <Route
             component={UsersPage}
             path={Routes.user.list}
+          />
+          <Route
+            component={CreateUserPage}
+            path={Routes.user.create}
           />
           <Route
             component={AdminsPage}

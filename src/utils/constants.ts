@@ -14,6 +14,8 @@ export const RESPONSIVE_WIDTH = 1024 as number;
 export const MAINTENANCE_DETAILS = 'MAINTENANCE_DETAILS';
 export const MAXIMUM_WORD_COUNT_FOR_RICH_TEXT_EDITOR: number = 10000;
 
+export const passwordRules = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+
 export const ACCEPTED_FILE_TYPES = {
   'image/jpeg': [],
   'image/png': [],
